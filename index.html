@@ -76,13 +76,103 @@ html,body{overscroll-behavior:none}.ov:not(.on) *{pointer-events:none!important}
 .home{left:6vw;right:6vw;top:23vh}.home h1{max-width:none;font-size:clamp(22px,6.4vw,27px);line-height:1.1}.badge{font-size:11px;padding:6px 12px 6px 10px;margin-bottom:1.4vh}.home .eb{font-size:10.5px;margin-bottom:.8vh}.home .sub{font-size:11px;line-height:1.45;margin:1.2vh 0 .8vh}.home p{font-size:11.5px;line-height:1.45;margin:0 0 1.8vh;max-width:none}.home .btn{height:40px;padding:0 20px;font-size:11px}
 .wk{top:auto;bottom:calc(12vh + env(safe-area-inset-bottom,0px))}.wk .btn{height:36px;padding:0 18px;font-size:10.5px}.arr{display:none}.ucard .btn{height:42px;padding:0 22px;font-size:12px}.ur{gap:10px}.dr{font-size:12.5px}}
 
+/* ===== Case study page (slides up from the bottom) ===== */
+#cs{position:fixed;inset:0;z-index:13;display:flex;flex-direction:column;background:#f3f1ec;color:var(--navy);transform:translate3d(0,100%,0);visibility:hidden;transition:transform .95s cubic-bezier(.77,0,.18,1),visibility 0s .95s;box-shadow:0 -30px 80px -30px rgba(6,34,63,.55)}
+#cs.on{transform:none;visibility:visible;transition:transform .95s cubic-bezier(.77,0,.18,1),visibility 0s}
+.cs-top{position:relative;flex:none;height:calc(64px + env(safe-area-inset-top,0px));display:flex;align-items:center;justify-content:space-between;padding:env(safe-area-inset-top,0px) 28px 0;border-bottom:1px solid rgba(6,34,63,.1)}
+.cs-top::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--blue);transform:scaleX(var(--sp,0));transform-origin:left}
+.cs-logo{height:34px;display:block}
+.btn.o.cs-x{height:40px;padding:0 18px;font-size:12px;gap:8px}
+.btn.o.cs-x:hover{background:var(--navy);color:#fff}
+.btn.o.cs-x svg{width:15px;height:15px}
+.cs-body{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr}
+.cs-stage{position:relative;overflow:hidden;container-type:size;background:radial-gradient(120% 90% at 30% 15%,#f0eee9,#dedbd4)}
+.cs-scroll{overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none;outline:none}
+.cs-scroll::-webkit-scrollbar{display:none}
+.cs-in{padding:0 clamp(32px,5.5vw,104px)}
+.cs-s{min-height:calc(var(--vh,1vh)*82);padding-top:calc(var(--vh,1vh)*14);opacity:.3;transition:opacity .6s}
+.cs-s.on{opacity:1}
+.cs-s:last-child{padding-bottom:calc(var(--vh,1vh)*36)}
+.cs-s h1{font-size:clamp(34px,3.5vw,58px);line-height:1.06;margin:0 0 .5em}
+.cs-s .lead{font-size:clamp(17px,1.35vw,21px);line-height:1.6;color:var(--navy);max-width:46ch;margin:0 0 2.2em}
+.cs-s h2{font-size:clamp(26px,2.3vw,38px);line-height:1.15;margin:0 0 .6em}
+.cs-s p{font-size:clamp(15px,1.1vw,17px);line-height:1.75;color:var(--mute);max-width:56ch;margin:0 0 1.2em}
+.cs-dots{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);display:flex;gap:12px;align-items:center;z-index:2}
+.cs-dots button{width:9px;height:9px;padding:0;border-radius:9px;border:1.5px solid var(--navy);background:transparent;cursor:pointer;transition:width .4s,background .4s}
+.cs-dots button.on{width:30px;background:var(--navy)}
+.cs-v{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transform:translate3d(0,6%,0) scale(.97);transition:opacity .7s ease,transform .9s cubic-bezier(.2,.7,.2,1);pointer-events:none}
+.cs-v.on{opacity:1;transform:none}
+.cs-v.past{transform:translate3d(0,-6%,0) scale(.97)}
+/* visual: cover */
+.v-cover{width:min(84cqw,calc(76cqh*1.7778));aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#cfccc6;box-shadow:0 40px 80px -30px rgba(6,34,63,.5);transform:translate3d(0,calc((.5 - var(--p,0))*28px),0)}
+.v-cover img{width:100%;height:100%;object-fit:cover;display:block}
+/* skeleton pieces that build in when a visual becomes active */
+.sk{background:#e9e7e2;border-radius:10px;opacity:0;transform:translateY(14px);transition:transform .7s cubic-bezier(.2,.7,.2,1),opacity .7s;transition-delay:0s}
+.cs-v.on .sk{opacity:1;transform:none;transition-delay:calc(var(--i,0)*70ms + 200ms)}
+.sk.b{background:var(--blue)}
+/* visual: UI */
+.v-win{width:min(80cqw,calc(68cqh*1.45));aspect-ratio:1.45;background:#fff;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 80px -30px rgba(6,34,63,.45);transform:translate3d(0,calc((.5 - var(--p,0))*22px),0)}
+.v-bar{flex:none;height:9%;display:flex;gap:6px;align-items:center;padding:0 4%;background:#f6f5f2;border-bottom:1px solid #ebe9e4}
+.v-bar i{width:9px;height:9px;border-radius:50%;background:#d6d3cc}
+.v-ui{flex:1;min-height:0;display:grid;grid-template-columns:22% 1fr;gap:4%;padding:4%}
+.v-side{display:grid;grid-auto-rows:9%;gap:7%;align-content:start}
+.v-main{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:16% 1fr 12%;gap:4%}
+.v-main .t{grid-column:1/-1}
+.v-main .c{grid-row:2;border-radius:12px}
+.v-main .b{grid-row:3;grid-column:1}
+.v-main .l{grid-row:3;grid-column:2/4}
+/* visual: flow */
+.v-flow{width:min(84cqw,calc(70cqh*1.45));height:auto;overflow:visible;transform:translate3d(0,calc((.5 - var(--p,0))*18px),0)}
+.v-flow path{fill:none;stroke:#8d9aa7;stroke-width:2;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .9s cubic-bezier(.4,0,.2,1);transition-delay:0s}
+.cs-v.on .v-flow path{stroke-dashoffset:0;transition-delay:calc(var(--i,0)*.18s + .35s)}
+.fn{opacity:0;transform:scale(.92);transform-box:fill-box;transform-origin:center;transition:opacity .6s,transform .6s cubic-bezier(.2,.7,.2,1);transition-delay:0s}
+.cs-v.on .fn{opacity:1;transform:none;transition-delay:calc(var(--i,0)*.12s + .1s)}
+.fn rect{fill:#fff;stroke:#cfccc6}
+.fn text{font:500 15px Inter,sans-serif;fill:var(--navy)}
+.fn.a rect{fill:var(--blue);stroke:none}
+.fn.z rect{fill:var(--navy);stroke:none}
+.fn.a text,.fn.z text{fill:#fff}
+/* visual: system */
+.v-sys{width:min(82cqw,calc(64cqh*1.5));aspect-ratio:1.5;display:grid;grid-template-columns:1.1fr 1fr;gap:4%;transform:translate3d(0,calc((.5 - var(--p,0))*20px),0)}
+.v-sys .sws{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:6%}
+.v-sys .sws .sk{border-radius:16px;display:flex;align-items:flex-end;padding:8%;font:500 max(11px,1.8cqmin) Inter,sans-serif;box-shadow:inset 0 0 0 1px rgba(6,34,63,.08)}
+.v-sys .ty{display:grid;grid-template-rows:1fr 1fr;gap:6%}
+.v-sys .ty .sk{background:#fff;border-radius:16px;display:flex;flex-direction:column;justify-content:space-between;padding:8%;box-shadow:0 20px 40px -24px rgba(6,34,63,.35)}
+.v-sys .ty span{font:400 max(11px,1.8cqmin) Inter,sans-serif;color:var(--mute)}
+.v-sys .f1{font:300 14cqmin/1 Fraunces,Georgia,serif}
+.v-sys .f2{font:500 11cqmin/1 Inter,sans-serif}
+/* visual: result */
+.v-res{width:min(80cqw,calc(62cqh*1.55));aspect-ratio:1.55;background:#fff;border-radius:18px;padding:6%;display:flex;flex-direction:column;box-shadow:0 40px 80px -30px rgba(6,34,63,.45);transform:translate3d(0,calc((.5 - var(--p,0))*20px),0)}
+.v-res .rt .sk{height:14px;width:46%;margin-bottom:8px}
+.v-res .rt .sk.s{width:28%;height:10px}
+.v-res .bars{flex:1;min-height:0;display:flex;align-items:flex-end;gap:5%;border-bottom:1px solid #e3e0da;margin-top:4%}
+.v-res .bars i{flex:1;height:calc(var(--h)*1%);background:#dcd9d2;border-radius:8px 8px 0 0;transform:scaleY(0);transform-origin:bottom;transition:transform 1s cubic-bezier(.2,.7,.2,1);transition-delay:0s}
+.v-res .bars i.h{background:var(--blue)}
+.cs-v.on .bars i{transform:none;transition-delay:calc(var(--i,0)*90ms + 250ms)}
+.v-res .rl{display:flex;gap:5%;margin-top:4%}
+.v-res .rl .sk{flex:1;height:10px}
+@media (orientation:portrait){
+.cs-top{padding:env(safe-area-inset-top,0px) 16px 0}
+.cs-logo{height:30px}
+.cs-body{grid-template-columns:1fr;grid-template-rows:calc(var(--vh,1vh)*40) 1fr}
+.cs-stage{border-bottom:1px solid rgba(6,34,63,.1)}
+.cs-dots{bottom:10px;gap:10px}
+.cs-in{padding:0 22px}
+.cs-s{min-height:calc(var(--vh,1vh)*56);padding-top:calc(var(--vh,1vh)*5)}
+.cs-s h1{font-size:30px}
+.cs-s h2{font-size:24px}
+.cs-s p{font-size:15px}
+.cs-s .lead{font-size:16px;margin-bottom:1.6em}
+}
+@media (prefers-reduced-motion:reduce){#cs,#cs.on{transition-duration:.01s}.cs-v,.sk,.fn,.v-flow path,.v-res .bars i{transition-duration:.01s!important;transition-delay:0s!important}}
+
 </style>
 </head>
 <body>
 <div id="intro"><div class="ip t"><span>Welcome to</span></div><div class="ip b"><span>Ali Hafidz Portfolio.</span></div><div class="lb"><i></i></div></div>
 <header><a class="logo" href="#" aria-label="Logo placeholder"><img src="assets/logo.svg" alt="Logo"></a><nav id="nav"><a data-g="0">Home</a><a data-g="1">About</a><a data-g="2">Work</a><a data-g="6">Contact</a></nav></header>
 <button id="bg" aria-label="Menu"><span></span><span></span></button><div id="menu"><a data-g="0">Home</a><a data-g="1">About</a><a data-g="2">Work</a><a data-g="6">Reviews</a><a data-g="7">Contact</a></div>
-<div id="gl"></div><div class="scrim"></div><div id="ovs"></div>
+<div id="gl"></div><div class="scrim"></div><div id="ovs"></div><div id="cs" role="dialog" aria-modal="true" aria-label="Case study" aria-hidden="true"><div class="cs-top"><img class="cs-logo" src="assets/logo.svg" alt=""><button class="btn o cs-x" id="csX" type="button" aria-label="Close case study"></button></div><div class="cs-body"><div class="cs-stage" id="csV"></div><div class="cs-scroll" id="csS" tabindex="-1"></div></div></div>
 <button class="arr p" id="prev" aria-label="Previous">‹</button><button class="arr n" id="next" aria-label="Next">›</button>
 <div class="dots" id="dots"></div>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
@@ -103,6 +193,24 @@ const TESTIMONIALS=[{q:'Very easy to work with, very thorough, great productivit
 /* img = path to cover (1920×1080 landscape, 1080×1920 if orient:'portrait'). Replace the files in assets/projects/ or change the paths. */
 const WORKS=[{t:'Northwind Banking App',d:'A mobile banking redesign built around clarity and trust.',img:'assets/projects/project-01.webp',orient:'landscape'},{t:'Lumen Design System',d:'A scalable component library used by six product teams.',img:'assets/projects/project-02.webp',orient:'landscape'},{t:'Atlas Travel Platform',d:'An end-to-end booking flow that cut drop-off by a third.',img:'assets/projects/project-03.webp',orient:'landscape'},{t:'Verde Brand & Web',d:'Identity and website for a sustainable-goods startup.',img:'assets/projects/project-04.webp',orient:'landscape'}];
 /* ----------------- */
+/* CASE STUDY: one block per scroll step. v = which visual shows on the left (cover | flow | ui | system | result). To give one project its own story, add cs:[...] to that WORKS item. */
+const CASE=[
+  {h:'Lorem ipsum dolor sit amet',v:'cover',p:[
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.']},
+  {h:'Consectetur adipiscing elit',v:'flow',p:[
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.']},
+  {h:'Sed do eiusmod tempor',v:'ui',p:[
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.']},
+  {h:'Ut enim ad minim veniam',v:'system',p:[
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.']},
+  {h:'Duis aute irure dolor',v:'result',p:[
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.']}
+];
 const BAY=14,N=7,H=5.6,L=BAY*N+30,CX=BAY*3,XMIN=CX-L/2,XMAX=CX+L/2,$=id=>document.getElementById(id),MV=matchMedia('(orientation:portrait)').matches,NS=MV?8:7;matchMedia('(orientation:portrait)').addEventListener('change',()=>location.reload());
 /* load-failure flag (console + on-screen) */
 const FAIL=[];function fail(u){FAIL.push(u);console.error('[gallery] FAILED TO LOAD: '+u);let b=$('warn');if(!b){b=document.createElement('div');b.id='warn';b.style.cssText='position:fixed;left:12px;bottom:12px;z-index:20;max-width:min(92vw,420px);background:#3b0d0d;color:#fff;font:12px/1.5 Inter,sans-serif;padding:10px 14px;border-radius:10px;white-space:pre-wrap;pointer-events:none';document.body.appendChild(b)}b.textContent='Failed to load ('+FAIL.length+'):\n'+FAIL.join('\n')}
@@ -211,7 +319,7 @@ const CON_M=`<div class="cwm"><div class="ucard"><div class="ur"><a class="btn" 
 const sections=[
 `<div class="home"><div class="badge"><span class="dot"></span>Open for new projects / opportunities</div><div class="eb"><span class="roll"><span class="ri"><i>Product</i><i>UI/UX</i><i>Website</i><i>Mobile App</i><i>Product</i></span></span> Designer</div><h1>Turning your ideas into <em>working products.</em></h1><div class="sub">Top Rated on Upwork · 40+ projects completed · 98% job success</div><p>I’m Ali Hafidz, and I work with founders and product owners. I start by learning how your business runs, then shape a solution that fits it.</p><button class="btn" id="heroCta">Scroll to Explore <span class="ar">→</span></button></div>`,
 `<div class="abw"><div class="glass l ab"><div class="eb">About Me</div>${ME.bio.map(t=>`<p>${t}</p>`).join('')}<div class="row"><a class="btn" href="${ME.cv}" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5M4 20h16"/></svg>Download Resume</a></div></div><div class="glass r ab"><h2 class="wx">Work Experience</h2>${HISTORY.map(h=>`<div class="xp"><div class="d">${h[0]}</div><h3>${h[1]}</h3><div class="c">${h[2]}</div><div class="a">${h[3]}</div></div>`).join('')}</div></div>`,
-...WORKS.map((w,k)=>`<div class="wk"><div class="n">0${k+1} / Selected work</div><h2>${w.t}</h2><p>${w.d}</p><a class="btn" href="#" onclick="return false">View case study →</a></div>`),
+...WORKS.map((w,k)=>`<div class="wk"><div class="n">0${k+1} / Selected work</div><h2>${w.t}</h2><p>${w.d}</p><a class="btn" href="#" data-cs="${k}">View case study →</a></div>`),
 `<div class="cw"><div class="ct"><div class="eb">Let’s Talk</div><h2>Let’s take your idea from paper to a <em>live product.</em></h2><p>Send me a project brief, even a rough one. I’ll come back with questions and a first take on how I’d approach it.</p><nav class="cl">${[['Email','mailto:'+ME.email],['WhatsApp',ME.whatsapp],['LinkedIn',ME.linkedin]].map(c=>`<a href="${c[1]}"${ext(c[1])}><span>${c[0]}</span>${AR}</a>`).join('')}</nav></div>
 <div class="cr"><div class="tcol"><div class="tv" aria-live="polite"><div class="tt">${TESTIMONIALS.map(t=>`<figure class="ts" style="--k:${t.q.length>250?4.3:t.q.length>120?4.9:5.6}"><span class="qm">“</span><blockquote>${t.q}</blockquote><figcaption><span class="av">${t.n.split(' ').map(w=>w[0]).join('').slice(0,2)}</span><span><b>${t.n}</b><br><span>${t.r}</span></span></figcaption></figure>`).join('')}</div></div>
 <div class="tn"><div class="tb"><button id="tprev" aria-label="Previous review"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button><button id="tnext" aria-label="Next review"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button></div></div></div>
@@ -221,14 +329,15 @@ const closeSheets=()=>document.querySelectorAll('.sheet.open').forEach(e=>{e.cla
 $('ovs').innerHTML=sections.map(s=>`<div class="ov">${s}</div>`).join('');
 const OV=[...document.querySelectorAll('.ov')],dots=OV.map((_,k)=>{const b=document.createElement('button');b.setAttribute('aria-label','Go to '+(k+1));b.onclick=()=>go(k);$('dots').appendChild(b);return b});
 const links=[...document.querySelectorAll('#nav a')],ML=[...document.querySelectorAll('#menu a')];links.forEach(a=>a.onclick=()=>go(+a.dataset.g));
+let csOpen=false,csHold=0;
 let i=0,lock=false,cx=0,smx=0,smy=0,mx=0,my=0,Z0=11;
 function render(){OV.forEach((o,k)=>o.classList.toggle('on',k===i));dots.forEach((d,k)=>d.classList.toggle('on',k===i));$('prev').disabled=!i;$('next').disabled=i===NS-1;const g=i<2?i:i<6?2:6;links.forEach(a=>a.classList.toggle('on',+a.dataset.g===g));ML.forEach(a=>a.classList.toggle('on',+a.dataset.g===(i<2?i:i<6?2:i)));closeSheets()}
 const go=n=>{n=Math.max(0,Math.min(NS-1,n));if(n!==i){i=n;render()}};
 const step=d=>{if(lock)return;const b=i;go(i+d);if(i!==b){lock=true;setTimeout(()=>lock=false,1100)}};
-addEventListener('wheel',e=>{e.preventDefault();const d=Math.abs(e.deltaY)>Math.abs(e.deltaX)?e.deltaY:e.deltaX;if(Math.abs(d)>8)step(Math.sign(d))},{passive:false});
-addEventListener('keydown',e=>{if(/Arrow(Right|Down)|PageDown| /.test(e.key))step(1);if(/Arrow(Left|Up)|PageUp/.test(e.key))step(-1)});
+addEventListener('wheel',e=>{e.preventDefault();if(csOpen)return;const d=Math.abs(e.deltaY)>Math.abs(e.deltaX)?e.deltaY:e.deltaX;if(Math.abs(d)>8)step(Math.sign(d))},{passive:false});
+addEventListener('keydown',e=>{if(csOpen)return;if(/Arrow(Right|Down)|PageDown| /.test(e.key))step(1);if(/Arrow(Left|Up)|PageUp/.test(e.key))step(-1)});
 let sx=null,sy=0;addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY});
-addEventListener('pointerup',e=>{if(sx!==null&&Math.abs(e.clientX-sx)>50&&Math.abs(e.clientX-sx)>Math.abs(e.clientY-sy))step(e.clientX<sx?1:-1);sx=null});
+addEventListener('pointerup',e=>{if(!csOpen&&sx!==null&&Math.abs(e.clientX-sx)>50&&Math.abs(e.clientX-sx)>Math.abs(e.clientY-sy))step(e.clientX<sx?1:-1);sx=null});
 addEventListener('pointermove',e=>{if(MV)return;mx=e.clientX/innerWidth*2-1;my=e.clientY/innerHeight*2-1;const s=document.documentElement.style;s.setProperty('--mx',mx.toFixed(3));s.setProperty('--my',my.toFixed(3))});
 {const ri=document.querySelector('.roll .ri'),rl=ri.parentNode,ws=[...ri.children];let k=0;const set=()=>{ri.style.transform=`translateY(${-k*1.5}em)`;rl.style.width=ws[k].offsetWidth+'px'};set();document.fonts&&document.fonts.ready.then(set);
  if(!matchMedia('(prefers-reduced-motion:reduce)').matches)setInterval(()=>{k++;set();if(k===ws.length-1)setTimeout(()=>{ri.style.transition='none';k=0;set();ri.offsetHeight;ri.style.transition=''},650)},2200)}
@@ -238,10 +347,10 @@ if(MV){const cur=()=>OV[i]&&OV[i].querySelector('.sheet'),op=e=>e.classList.cont
  document.querySelectorAll('.sheet').forEach(e=>e.addEventListener('click',x=>{if(!op(e)&&!x.target.closest('a,button'))e.classList.add('open')}));
  let ts=null;
  addEventListener('touchstart',e=>{const t=e.touches[0],sh=e.target.closest&&e.target.closest('.sheet');ts={x:t.clientX,y:t.clientY,sh,top:sh?atTop(sh):false,bot:sh?atBot(sh):false,done:false}},{passive:true});
- addEventListener('touchmove',e=>{if(!ts||ts.done||mOn())return;const t=e.touches[0],dy=t.clientY-ts.y,dx=t.clientX-ts.x,s=cur();if(!s||Math.abs(dy)<14||Math.abs(dy)<Math.abs(dx))return;
+ addEventListener('touchmove',e=>{if(!ts||ts.done||mOn()||csOpen)return;const t=e.touches[0],dy=t.clientY-ts.y,dx=t.clientX-ts.x,s=cur();if(!s||Math.abs(dy)<14||Math.abs(dy)<Math.abs(dx))return;
   if(!op(s)&&dy<0){s.classList.add('open');ts.done=true}                                   /* first swipe up: open the card */
   else if(op(s)&&dy>0&&atTop(s)&&(!ts.sh||ts.top)){s.classList.remove('open');s.scrollTop=0;ts.done=true}},{passive:true});
- addEventListener('touchend',e=>{if(!ts)return;const t=e.changedTouches[0],dx=t.clientX-ts.x,dy=t.clientY-ts.y,g=ts;ts=null;if(g.done||mOn()||Math.abs(dy)<60||Math.abs(dy)<Math.abs(dx)*1.2)return;const s=cur();
+ addEventListener('touchend',e=>{if(!ts)return;const t=e.changedTouches[0],dx=t.clientX-ts.x,dy=t.clientY-ts.y,g=ts;ts=null;if(g.done||mOn()||csOpen||Math.abs(dy)<60||Math.abs(dy)<Math.abs(dx)*1.2)return;const s=cur();
   if(!s){step(dy<0?1:-1);return}                                                           /* page without a card */
   if(!op(s)){if(dy>0)step(-1);return}                                                      /* closed card: swipe down = previous page */
   if(dy<0){if(g.sh){if(g.bot)step(1)}else if(atBot(s))step(1);else s.scrollBy({top:-dy,behavior:'smooth'})}   /* open card: end reached -> next page */
@@ -251,6 +360,59 @@ document.querySelectorAll('.uw img').forEach(im=>im.addEventListener('error',()=
  const idx=()=>((RV.tk%n)+n)%n,show=x=>{RV.tk=x;tr.style.transform=`translateX(${-idx()*100}%)`;t=0};
  $('tprev').onclick=()=>show(RV.tk-1);$('tnext').onclick=()=>show(RV.tk+1);hv.forEach(e=>{e.onmouseenter=()=>hold=true;e.onmouseleave=()=>hold=false});
  setInterval(()=>{if(hold||document.hidden||i!==6)return;if(++t>=dw[idx()])show(RV.tk+1)},1000);show(0)}
+
+/* ===== Case study page: slides up, left stage follows the text on the right ===== */
+{
+const cs=$('cs'),sc=$('csS'),st=$('csV'),X=$('csX'),RM=matchMedia('(prefers-reduced-motion:reduce)').matches,
+ inert=[...document.querySelectorAll('#ovs,header,.dots,.arr,#bg,#menu')],
+ clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),mxs=()=>Math.max(0,sc.scrollHeight-sc.clientHeight);
+let tg=0,cu=0,act=-1,armed=false,raf=0,lastSp=-1,secs=[],vs=[],ds=[],back=null;
+X.innerHTML='Close <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg>';
+/* left-side visuals (placeholders built from neutral components) */
+const V={
+ cover:w=>`<div class="v-cover"><img src="${w.img}" alt="" decoding="async"></div>`,
+ ui:()=>{let n=0;const s=c=>`<div class="sk ${c||''}" style="--i:${n++}"></div>`;
+  return `<div class="v-win"><div class="v-bar"><i></i><i></i><i></i></div><div class="v-ui"><div class="v-side">${s()+s()+s()+s()+s()}</div><div class="v-main">${s('t')+s('c')+s('c')+s('c')+s('b')+s('l')}</div></div></div>`},
+ flow:()=>{const n=(x,y,t,c,i)=>`<g class="fn ${c}" style="--i:${i}"><rect x="${x}" y="${y}" width="130" height="64" rx="14"/><text x="${x+65}" y="${y+37}" text-anchor="middle">${t}</text></g>`,
+  p=(d,i)=>`<path pathLength="1" d="${d}" style="--i:${i}"/>`;
+  return `<svg class="v-flow" viewBox="0 0 580 400" aria-hidden="true">${p('M150 200C190 200 190 80 225 80',0)+p('M150 200C190 200 190 320 225 320',1)+p('M355 80C395 80 395 200 430 200',2)+p('M355 320C395 320 395 200 430 200',3)}${n(20,168,'Lorem','a',0)+n(225,48,'Ipsum','',1)+n(225,288,'Dolor','',2)+n(430,168,'Sit amet','z',3)}</svg>`},
+ system:()=>{const sw=[['#0A64BC','#fff'],['#06223F','#fff'],['#F3F1EC','#06223F'],['#D5D2CC','#06223F']];
+  return `<div class="v-sys"><div class="sws">${sw.map((c,n)=>`<div class="sk" style="--i:${n};background:${c[0]};color:${c[1]}"><span>${c[0]}</span></div>`).join('')}</div><div class="ty"><div class="sk" style="--i:4"><b class="f1">Aa</b><span>Fraunces</span></div><div class="sk" style="--i:5"><b class="f2">Aa</b><span>Inter</span></div></div></div>`},
+ result:()=>`<div class="v-res"><div class="rt"><div class="sk" style="--i:0"></div><div class="sk s" style="--i:1"></div></div><div class="bars">${[30,44,38,66,90].map((h,n)=>`<i class="${n===4?'h':''}" style="--h:${h};--i:${n}"></i>`).join('')}</div><div class="rl">${[0,1,2,3,4].map(n=>`<div class="sk" style="--i:${n+5}"></div>`).join('')}</div></div>`
+};
+const build=k=>{const w=WORKS[k],c=w.cs||CASE;
+ sc.innerHTML=`<div class="cs-in">${c.map((s,n)=>`<section class="cs-s">${n?'':`<h1>${w.t}</h1><p class="lead">${w.d}</p>`}<h2>${s.h}</h2>${s.p.map(t=>`<p>${t}</p>`).join('')}</section>`).join('')}</div>`;
+ st.innerHTML=c.map(s=>`<div class="cs-v next" aria-hidden="true">${(V[s.v]||V.cover)(w)}</div>`).join('')+`<div class="cs-dots">${c.map((s,n)=>`<button type="button" aria-label="Go to section ${n+1}" data-n="${n}"></button>`).join('')}</div>`;
+ secs=[...sc.querySelectorAll('.cs-s')];vs=[...st.querySelectorAll('.cs-v')];ds=[...st.querySelectorAll('.cs-dots button')]};
+/* which block is being read decides which visual is on stage */
+const sync=()=>{
+ const m=mxs(),sp=m?cu/m:0;if(Math.abs(sp-lastSp)>.0005){cs.style.setProperty('--sp',sp.toFixed(4));lastSp=sp}
+ if(!armed||!secs.length)return;
+ const y=cu+sc.clientHeight*.42;let a=0;secs.forEach((s,n)=>{if(s.offsetTop<=y)a=n});
+ if(a!==act){act=a;secs.forEach((s,n)=>s.classList.toggle('on',n===a));vs.forEach((v,n)=>{v.className='cs-v '+(n<a?'past':n===a?'on':'next')});ds.forEach((d,n)=>d.classList.toggle('on',n===a))}
+ const s=secs[act];vs[act].style.setProperty('--p',clamp((y-s.offsetTop)/s.offsetHeight,0,1).toFixed(3))};
+/* eased scrolling: wheel and keys move a target, the page glides toward it */
+const tick=()=>{if(!csOpen)return;const d=tg-cu;if(d){cu=Math.abs(d)>.4&&!RM?cu+d*.085:tg;sc.scrollTop=cu}sync();raf=requestAnimationFrame(tick)};
+sc.addEventListener('scroll',()=>{if(Math.abs(sc.scrollTop-cu)>2)tg=cu=sc.scrollTop},{passive:true});
+cs.addEventListener('wheel',e=>{e.preventDefault();if(Math.abs(e.deltaX)>Math.abs(e.deltaY))return;let d=e.deltaY;if(e.deltaMode===1)d*=32;else if(e.deltaMode===2)d*=sc.clientHeight;tg=clamp(tg+d,0,mxs())},{passive:false});
+const go=n=>{tg=clamp(n?secs[n].offsetTop-sc.clientHeight*.2:0,0,mxs())};
+st.addEventListener('click',e=>{const b=e.target.closest('.cs-dots button');if(b)go(+b.dataset.n)});
+const open=k=>{if(csOpen)return;build(k);back=document.activeElement;csOpen=true;csHold=performance.now()+1200;
+ inert.forEach(e=>e.inert=true);cs.classList.add('on');cs.setAttribute('aria-hidden','false');
+ sc.scrollTop=0;tg=cu=0;act=-1;armed=false;lastSp=-1;cs.style.setProperty('--sp',0);
+ setTimeout(()=>{if(csOpen){armed=true;sc.focus({preventScroll:true})}},520);raf=requestAnimationFrame(tick)};
+const close=()=>{if(!csOpen)return;csOpen=false;csHold=0;cs.classList.remove('on');cs.setAttribute('aria-hidden','true');
+ inert.forEach(e=>e.inert=false);cancelAnimationFrame(raf);back&&back.focus&&back.focus({preventScroll:true})};
+addEventListener('keydown',e=>{if(!csOpen)return;if(e.key==='Escape'){close();return}
+ if(e.key===' '&&e.target.closest&&e.target.closest('button'))return;
+ const h=sc.clientHeight;let d=null;
+ if(e.key==='ArrowDown')d=90;else if(e.key==='ArrowUp')d=-90;
+ else if(e.key==='PageDown'||(e.key===' '&&!e.shiftKey))d=h*.85;else if(e.key==='PageUp'||(e.key===' '&&e.shiftKey))d=-h*.85;
+ else if(e.key==='Home')tg=0;else if(e.key==='End')tg=mxs();else return;
+ e.preventDefault();if(d!==null)tg=clamp(tg+d,0,mxs())});
+X.onclick=close;
+document.addEventListener('click',e=>{const b=e.target.closest('[data-cs]');if(b){e.preventDefault();open(+b.dataset.cs)}});
+}
 $('prev').onclick=()=>go(i-1);$('next').onclick=()=>go(i+1);
 const PRMIN=MOBILE?2:1.5;let PR=Math.min(devicePixelRatio,Q.pr),slow=16,fcount=0,lastT=performance.now();
 function size(){const w=innerWidth,h=innerHeight,a=w/h,m=a<1||w<800,fr=m?.7:.45;Z0=m?9:10.5;
@@ -267,7 +429,7 @@ const scr=(x,y)=>{vv.set(x,y,.075).project(cam);return[(vv.x+1)/2*innerWidth,(1-
  if(MV?cx>5*BAY:(innerWidth>=innerHeight&&cx>4*BAY)){cam.updateMatrixWorld();const f=CF.rv,u=CF.uw,b=scr(f.x,f.yc-f.h/2-.035),l=scr(u.x-u.w/2-.035,u.yc-u.h/2-.035),r=scr(u.x+u.w/2+.035,u.yc),p=scr(f.x-f.w/2,f.yc+f.h/2),q=scr(f.x+f.w/2,f.yc-f.h/2);   /* pin the HTML under the hung frames */
   A1.style.transform=`translate(${b[0]}px,${b[1]+14}px) translateX(-50%)`;A2.style.width=(r[0]-l[0])+'px';A2.style.transform=`translate(${l[0]}px,${l[1]+14}px)`;const W=q[0]-p[0];if(Math.abs(W-tw)>.05){tw=W;A3.style.width=W+'px';A3.style.height=(q[1]-p[1])+'px';A3.style.setProperty('--u',W/100+'px')}A3.style.transform=`translate(${p[0]}px,${p[1]}px)`}
  const now=performance.now(),dt=now-lastT;lastT=now;if(dt<250){slow=slow*.95+dt*.05;if(++fcount>90&&slow>30&&PR>PRMIN){PR=Math.max(PRMIN,PR-.25);fcount=0;slow=16;size()}}   /* adaptive resolution: step down if frames stay slow */
- comp.render();requestAnimationFrame(loop)})();
+ if(!csOpen||performance.now()<csHold)comp.render();requestAnimationFrame(loop)})();
 </script>
 </body>
 </html>
