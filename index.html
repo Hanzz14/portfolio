@@ -77,10 +77,10 @@ html,body{overscroll-behavior:none}.ov:not(.on) *{pointer-events:none!important}
 .wk{top:auto;bottom:calc(12vh + env(safe-area-inset-bottom,0px))}.wk .btn{height:36px;padding:0 18px;font-size:10.5px}.arr{display:none}.ucard .btn{height:42px;padding:0 22px;font-size:12px}.ur{gap:10px}.dr{font-size:12.5px}}
 
 /* ===== Case study page (slides up from the bottom) ===== */
-#cs{position:fixed;inset:0;z-index:13;display:flex;flex-direction:column;background:#f3f1ec;color:var(--navy);transform:translate3d(0,100%,0);visibility:hidden;transition:transform .95s cubic-bezier(.77,0,.18,1),visibility 0s .95s;box-shadow:0 -30px 80px -30px rgba(6,34,63,.55)}
+#cs{--acc:var(--blue);position:fixed;inset:0;z-index:13;display:flex;flex-direction:column;background:#f3f1ec;color:var(--navy);transform:translate3d(0,100%,0);visibility:hidden;transition:transform .95s cubic-bezier(.77,0,.18,1),visibility 0s .95s;box-shadow:0 -30px 80px -30px rgba(6,34,63,.55)}
 #cs.on{transform:none;visibility:visible;transition:transform .95s cubic-bezier(.77,0,.18,1),visibility 0s}
 .cs-top{position:relative;flex:none;height:calc(64px + env(safe-area-inset-top,0px));display:flex;align-items:center;justify-content:space-between;padding:env(safe-area-inset-top,0px) 28px 0;border-bottom:1px solid rgba(6,34,63,.1)}
-.cs-top::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--blue);transform:scaleX(var(--sp,0));transform-origin:left}
+.cs-top::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--acc);transform:scaleX(var(--sp,0));transform-origin:left}
 .cs-logo{height:34px;display:block}
 .btn.o.cs-x{height:40px;padding:0 18px;font-size:12px;gap:8px}
 .btn.o.cs-x:hover{background:var(--navy);color:#fff}
@@ -109,7 +109,7 @@ html,body{overscroll-behavior:none}.ov:not(.on) *{pointer-events:none!important}
 /* skeleton pieces that build in when a visual becomes active */
 .sk{background:#e9e7e2;border-radius:10px;opacity:0;transform:translateY(14px);transition:transform .7s cubic-bezier(.2,.7,.2,1),opacity .7s;transition-delay:0s}
 .cs-v.on .sk{opacity:1;transform:none;transition-delay:calc(var(--i,0)*70ms + 200ms)}
-.sk.b{background:var(--blue)}
+.sk.b{background:var(--acc)}
 /* visual: UI */
 .v-win{width:min(80cqw,calc(68cqh*1.45));aspect-ratio:1.45;background:#fff;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 80px -30px rgba(6,34,63,.45);transform:translate3d(0,calc((.5 - var(--p,0))*22px),0)}
 .v-bar{flex:none;height:9%;display:flex;gap:6px;align-items:center;padding:0 4%;background:#f6f5f2;border-bottom:1px solid #ebe9e4}
@@ -129,7 +129,7 @@ html,body{overscroll-behavior:none}.ov:not(.on) *{pointer-events:none!important}
 .cs-v.on .fn{opacity:1;transform:none;transition-delay:calc(var(--i,0)*.12s + .1s)}
 .fn rect{fill:#fff;stroke:#cfccc6}
 .fn text{font:500 15px Inter,sans-serif;fill:var(--navy)}
-.fn.a rect{fill:var(--blue);stroke:none}
+.fn.a rect{fill:var(--acc);stroke:none}
 .fn.z rect{fill:var(--navy);stroke:none}
 .fn.a text,.fn.z text{fill:#fff}
 /* visual: system */
@@ -147,7 +147,7 @@ html,body{overscroll-behavior:none}.ov:not(.on) *{pointer-events:none!important}
 .v-res .rt .sk.s{width:28%;height:10px}
 .v-res .bars{flex:1;min-height:0;display:flex;align-items:flex-end;gap:5%;border-bottom:1px solid #e3e0da;margin-top:4%}
 .v-res .bars i{flex:1;height:calc(var(--h)*1%);background:#dcd9d2;border-radius:8px 8px 0 0;transform:scaleY(0);transform-origin:bottom;transition:transform 1s cubic-bezier(.2,.7,.2,1);transition-delay:0s}
-.v-res .bars i.h{background:var(--blue)}
+.v-res .bars i.h{background:var(--acc)}
 .cs-v.on .bars i{transform:none;transition-delay:calc(var(--i,0)*90ms + 250ms)}
 .v-res .rl{display:flex;gap:5%;margin-top:4%}
 .v-res .rl .sk{flex:1;height:10px}
@@ -164,6 +164,53 @@ html,body{overscroll-behavior:none}.ov:not(.on) *{pointer-events:none!important}
 .cs-s p{font-size:15px}
 .cs-s .lead{font-size:16px;margin-bottom:1.6em}
 }
+/* rich text blocks */
+.cs-s h3{font:600 12px/1.4 Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);margin:2.2em 0 .9em}
+.cs-s strong{color:var(--navy);font-weight:600}
+.cs-s ul,.cs-s ol{max-width:56ch;margin:0 0 1.4em;padding-left:1.25em;font-size:clamp(15px,1.1vw,17px);line-height:1.7;color:var(--mute)}
+.cs-s li{margin:0 0 .55em;padding-left:.3em}
+.cs-s li::marker{color:var(--acc);font-weight:600}
+.cs-s blockquote{max-width:46ch;margin:1.8em 0;padding:.1em 0 .1em 1.2em;border-left:3px solid var(--acc);font:300 clamp(19px,1.6vw,25px)/1.4 Fraunces,Georgia,serif;color:var(--navy)}
+.cs-s .note{font-size:13px;line-height:1.6;font-style:italic;color:#6b7783}
+.cs-s dl{display:grid;grid-template-columns:max-content 1fr;gap:.9em 1.6em;max-width:56ch;margin:0 0 1.6em;font-size:clamp(14px,1.05vw,16px);line-height:1.6}
+.cs-s dt{font:600 11px/1.9 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
+.cs-s dd{margin:0;color:var(--mute)}
+.cs-s .thx{margin-top:2.4em;padding-top:1.6em;border-top:1px solid rgba(6,34,63,.14)}
+.cs-s .thx .nm{font:300 clamp(26px,2.3vw,38px)/1.1 Fraunces,Georgia,serif;color:var(--navy);margin:0 0 .5em}
+.cs-s .thx p{margin:0 0 .4em}
+.cs-s .thx a{color:var(--acc);text-decoration:none;border-bottom:1px solid currentColor}
+/* new visuals */
+.v-cmp{width:min(86cqw,calc(66cqh*1.55));display:grid;grid-template-columns:1fr 1fr;gap:5%;transform:translate3d(0,calc((.5 - var(--p,0))*20px),0)}
+.v-cmp>div{background:#fff;border-radius:18px;padding:9% 8%;box-shadow:0 30px 60px -30px rgba(6,34,63,.4)}
+.v-cmp>div.b{background:var(--acc);color:#fff}
+.v-cmp h4{margin:0 0 1.1em;font:300 max(18px,3.4cqmin)/1.1 Fraunces,Georgia,serif}
+.v-cmp p{margin:0 0 .8em;padding-top:.8em;border-top:1px solid rgba(6,34,63,.12);font:400 max(12px,2.2cqmin)/1.4 Inter,sans-serif;color:var(--mute)}
+.v-cmp .b p{border-color:rgba(255,255,255,.3);color:#fff}
+.v-st{width:min(84cqw,calc(70cqh*1.3));display:grid;grid-template-columns:repeat(2,1fr);gap:5%;transform:translate3d(0,calc((.5 - var(--p,0))*20px),0)}
+.v-st>div{background:#fff;border-radius:18px;padding:9% 8%;box-shadow:0 30px 60px -30px rgba(6,34,63,.4)}
+.v-st>div:first-child{background:var(--acc);color:#fff}
+.v-st>div:last-child:nth-child(odd){grid-column:1/-1}
+.v-st b{display:block;font:300 max(30px,9.5cqmin)/1 Fraunces,Georgia,serif}
+.v-st span{display:block;margin-top:.7em;font:400 max(12px,2.1cqmin)/1.4 Inter,sans-serif;opacity:.75}
+.v-rows{width:min(84cqw,calc(60cqh*1.5));background:#fff;border-radius:18px;padding:3% 7%;box-shadow:0 30px 60px -30px rgba(6,34,63,.4);transform:translate3d(0,calc((.5 - var(--p,0))*20px),0)}
+.v-rows>div{display:flex;justify-content:space-between;gap:6%;align-items:baseline;padding:5% 0;border-bottom:1px solid #ebe9e4;opacity:0;transform:translateY(12px);transition:opacity .7s,transform .7s cubic-bezier(.2,.7,.2,1)}
+.v-rows>div:last-child{border:0}
+.cs-v.on .v-rows>div{opacity:1;transform:none;transition-delay:calc(var(--i,0)*90ms + 200ms)}
+.v-rows b{font:300 max(17px,3.2cqmin)/1.2 Fraunces,Georgia,serif;color:var(--navy)}
+.v-rows span{font:400 max(12px,2.1cqmin)/1.4 Inter,sans-serif;color:var(--mute);text-align:right}
+.v-fn{width:min(80cqw,calc(62cqh*1.4));display:grid;gap:5%;transform:translate3d(0,calc((.5 - var(--p,0))*20px),0)}
+.v-fn>div{border-radius:16px;padding:6% 8%;background:#fff;box-shadow:0 24px 50px -28px rgba(6,34,63,.4);opacity:0;transform:translateY(14px);transition:opacity .7s,transform .7s cubic-bezier(.2,.7,.2,1)}
+.v-fn>div.b{background:var(--acc);color:#fff}
+.cs-v.on .v-fn>div{opacity:1;transform:none;transition-delay:calc(var(--i,0)*110ms + 200ms)}
+.v-fn b{display:block;font:300 max(19px,3.6cqmin)/1.1 Fraunces,Georgia,serif}
+.v-fn span{display:block;margin-top:.5em;font:400 max(12px,2.1cqmin)/1.4 Inter,sans-serif;opacity:.7}
+.v-shots{width:min(88cqw,calc(86cqh*var(--n)*.5));display:flex;justify-content:center;gap:4%;transform:translate3d(0,calc((.5 - var(--p,0))*22px),0)}
+.v-shots figure{flex:1;margin:0;min-width:0;max-width:calc(68cqh*.46)}
+.v-shots .ph{position:relative;aspect-ratio:9/19;border-radius:7% / 3.4%;overflow:hidden;background:#fff;box-shadow:0 36px 70px -30px rgba(6,34,63,.5),inset 0 0 0 1px rgba(6,34,63,.1);display:grid;place-items:center;padding:8%;text-align:center;font:400 max(11px,1.9cqmin)/1.4 Inter,sans-serif;color:#8a949e}
+.v-shots img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.v-shots figcaption{margin-top:6%;text-align:center;font:500 max(11px,1.9cqmin)/1.3 Inter,sans-serif;letter-spacing:.04em;color:var(--navy)}
+@media (orientation:portrait){.cs-s h3{margin-top:1.8em}.v-shots figure{max-width:calc(80cqh*.46)}.v-cmp>div,.v-st>div{padding:7% 6%}}
+
 @media (prefers-reduced-motion:reduce){#cs,#cs.on{transition-duration:.01s}.cs-v,.sk,.fn,.v-flow path,.v-res .bars i{transition-duration:.01s!important;transition-delay:0s!important}}
 
 </style>
@@ -191,7 +238,73 @@ const ME={name:'Your Name',role:'Product designer & front-end explorer',tag:'I d
 const HISTORY=[/* [date, title, company, one-line achievement] */['2024 – Present','Freelance Product Designer','Various Clients','Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor.'],['2024','Product Designer Intern','Vidio.com','Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.'],['2023','UI/UX Designer Intern','Vesuvio Studio','Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.']];
 const TESTIMONIALS=[{q:'Very easy to work with, very thorough, great productivity, creativity and detail oriented.',n:'Che Monagan',r:'Founder of PharmaChelation'},{q:'If you’re looking for a professional designer, you’re in the right place with Ali. He’s a very talented designer who can create beautiful applications. He completed everything on time and responded quickly to all my questions. He also took my feedback into account throughout the design process. I would definitely hire him again.',n:'Moritz Heschl',r:'Founder of Clipzy'},{q:'Ali is a very skilled UX/UI designer. He audited our webapp and was able to come up with multiple effective redesigns based on our market segmentation. I would definitely recommend him and looking forward to working with him again.',n:'Mike M',r:'Founder of DayOD'}];
 /* img = path to cover (1920×1080 landscape, 1080×1920 if orient:'portrait'). Replace the files in assets/projects/ or change the paths. */
-const WORKS=[{t:'Northwind Banking App',d:'A mobile banking redesign built around clarity and trust.',img:'assets/projects/project-01.webp',orient:'landscape'},{t:'Lumen Design System',d:'A scalable component library used by six product teams.',img:'assets/projects/project-02.webp',orient:'landscape'},{t:'Atlas Travel Platform',d:'An end-to-end booking flow that cut drop-off by a third.',img:'assets/projects/project-03.webp',orient:'landscape'},{t:'Verde Brand & Web',d:'Identity and website for a sustainable-goods startup.',img:'assets/projects/project-04.webp',orient:'landscape'}];
+/* WORK 1 CASE STUDY (Vidio). Text blocks: 'string' = paragraph, {h3},{ul},{ol},{quote},{note},{kv:[[k,v]]},{thanks:1}. v = visual: shots | cmp | st | rows | fn. d = visual data. */
+const VIDIO={acc:'#B83A2E',title:'Helping Vidio Users Find What They Love',sub:'Designing an Explicit Feedback System for the Homepage',
+ meta:[['Role','Product Design Intern (Front Funnel, Mobile)'],['Company','Vidio']],
+ tested:'Tested with 30 users: 73.3% task success, 37s avg. completion, 2.2/5 difficulty.',
+ sections:[
+ {h:'Overview',v:'shots',d:{items:[['assets/vidio/hero.webp','Hero: final homepage + feedback sheet']]},b:[
+  'Vidio has thousands of titles, but a large catalog only helps if users can find what is relevant to them. I designed an Active Feedback System for the mobile homepage. It lets users tell Vidio what they like or dislike at two levels, the individual poster and the whole recommendation section, and follows up with short questions to understand why. The goal was to turn the homepage from a generic catalog into a personalized one.',
+  {kv:[['Problem','Users often feel “lost” on the homepage because recommendations do not match their personal taste.'],['Solution','A Like / Super Like / Dislike option directly on the poster, an Interested / Not Interested option on each section, and a short follow-up question to learn the reason behind each dislike.']]},
+  {note:'The feature shipped after my internship ended, so this case study covers internal testing results and projected impact rather than post-launch data.'}]},
+ {h:'The problem',v:'cmp',d:{a:['Implicit feedback',['Watch time','Search history','Shows what someone watched']],b:['Explicit feedback',['Content preferences','Watch list','Shows what they truly like']]},b:[
+  'Vidio’s biggest challenge was no longer quantity but <strong>relevance</strong>. Many users opened the homepage and felt it was made for someone else. When recommendations miss, users spend more time browsing, lose interest, and may leave without watching anything.',
+  'Vidio mostly understood users through <strong>implicit feedback</strong>, signals collected passively such as watch time and search history. These signals are useful but incomplete: they show what someone watched, not whether they actually enjoyed it.',
+  '<strong>Explicit feedback</strong>, where users consciously tell the system their preferences (for example content preferences or a watch list), fills that gap.',
+  {quote:'<strong>The opportunity:</strong> use explicit feedback to bridge the gap between what users watch and what they truly like.'}]},
+ {h:'Research and context',v:'fn',d:[['Front funnel','Homepage · my scope',1],['Mid funnel','Content profile page'],['End funnel','Watch page and Shorts']],b:[
+  {h3:'Learning from industry leaders'},
+  'The UX Research team analyzed platforms like Netflix and YouTube. Both let users react to content with simple feedback, and we adopted a similar model (Like, Super Like, Dislike) to measure how relevant the content on the homepage is.',
+  {h3:'A holistic strategy'},
+  'The team approached the problem with a 3-funnel strategy:',
+  {ul:['<strong>Front funnel:</strong> Homepage','<strong>Mid funnel:</strong> Content profile page','<strong>End funnel:</strong> Watch page and Shorts']},
+  '<strong>My scope:</strong> I was responsible for the front funnel on mobile, exploring how explicit feedback could be added to the homepage.',
+  {h3:'The key question'},
+  {quote:'How can users give feedback before they watch the content?'}]},
+ {h:'People do judge a book by its cover',v:'st',d:[['1.9/10','rating from 23K reviews'],['20,878','people had actually watched it'],['3','signals on a poster: cast, genre, visual vibe']],b:[
+  'In February 2025, the Indonesian remake of <em>A Business Proposal</em> was released in cinemas and received a 1.9/10 rating from 23K reviews, while only about 20,878 people had actually watched it. After digging deeper, the backlash traced back to a controversial statement made by one of the lead actors during a press conference.',
+  'This shows that the cast is one of the deciding factors for whether people choose to watch something, and the cast is usually visible right on the poster. A poster carries three crucial signals:',
+  {ul:['<strong>Cast</strong>','<strong>Genre</strong>','<strong>Visual vibe</strong>']},
+  {quote:'On the homepage, the poster is the main decision-making tool. So that is where feedback should live.'},
+  'By placing explicit feedback directly on the poster, users get the power to filter content <em>before</em> they invest time in it.',
+  {note:'Sources: IMDb, Tempo.co'}]},
+ {h:'Goals and design challenges',v:'cmp',d:{a:['The homepage’s job',['Display recommendations','Convert users into viewers']],b:['Feedback’s role',['Support that job, not compete','Never clutter the screen']]},b:[
+  'Two <em>How Might We</em> questions guided the work:',
+  {ol:['How might we <strong>capture user preferences instantly</strong>?','How might we <strong>provide curated recommendations efficiently</strong>?']},
+  'One constraint shaped every decision: <strong>the homepage exists to display recommendations and convert users into viewers.</strong> Feedback features could not compete with that job or clutter the screen.']},
+ {h:'Content-level feedback',v:'shots',d:{items:[['assets/vidio/option-1.webp','1. Hold the poster'],['assets/vidio/option-2.webp','2. Enlarged posters'],['assets/vidio/option-3.webp','3. Dedicated section']]},b:[
+  '<em>Like this, love it, not into it.</em> Users give feedback directly on a poster, even before watching, so the system can learn what they like and show similar content on the homepage.',
+  {h3:'Options I explored'},
+  {ol:['<strong>Hold the poster</strong> to open a bottom sheet with feedback options','<strong>Enlarge the posters</strong> and add feedback buttons on each one','<strong>Create a dedicated section</strong> for content that is waiting for feedback']}]},
+ {h:'Decision: the bottom sheet',v:'shots',d:{items:[['assets/vidio/longpress.webp','Long-press a poster'],['assets/vidio/sheet.webp','Like / Super Like / Dislike']]},b:[
+  'Explicit feedback is not the main feature of the homepage. The homepage’s purpose is to show recommendations and convert users into viewers, so feedback should support that goal, not compete with it.',
+  {ul:['Hidden inside a bottom sheet, so the homepage stays clean','Can be applied to any content in any section','Does not make the homepage crowded','Uses the long-press interaction that is common in mobile apps','Lets users stay focused on the poster while making their choice']},
+  '<strong>Trade-off:</strong> hidden interactions are less discoverable. I accepted this because feedback is a supporting feature, and I planned to validate discoverability in testing.']},
+ {h:'Section-level feedback',v:'cmp',d:{a:['Assuming',['“Don’t show me this”','Decides for the user','Feels like the system already knew']],b:['Asking',['“Interested / Not Interested”','Asks the user directly','Neutral, open to new categories']]},b:[
+  '<em>Interested or Not Interested.</em> Users can tell Vidio whether an entire recommendation section fits their taste. Instead of rating titles one by one, they can clean up their homepage at scale so it contains only what they like.',
+  {h3:'Asking instead of assuming'},
+  'Vidio has a business need to introduce users to new categories. If the interface assumed from the start that “this section isn’t for you,” users would feel the system already knew what they disliked and kept showing it anyway. So I chose a neutral tone in the copy and a question-based approach, “Interested / Not Interested,” instead of an assumption-based one like “Don’t show me this.”',
+  {ul:['Neutral tone in copywriting','Ask users directly instead of guessing']}]},
+ {h:'Feedback is a conversation',v:'shots',d:{items:[['assets/vidio/followup-content.webp','Content-level follow-up'],['assets/vidio/followup-section.webp','Section-level follow-up']]},b:[
+  'Tapping “dislike” should not be the end of the interaction. At both the content level and the section level, the system follows up with short answer options (for example, “Not my taste”) to capture the reason.',
+  'This gives the algorithm more precise data and gives users confidence that similar recommendations will stop appearing.']},
+ {h:'Internal testing',v:'rows',d:[['Heavy users','Every day'],['Moderate users','A few times a week'],['Light users','Only for something specific']],b:[
+  'The feature shipped after my internship ended, so I could not monitor its post-launch performance. What I can share is the internal testing completed before handoff, and the success metrics I defined for the team to track after launch.',
+  'I tested the design with <strong>30 participants</strong>, split into three groups of 10 based on how often they use Vidio:',
+  {ul:['<strong>Heavy users:</strong> use Vidio every day','<strong>Moderate users:</strong> use Vidio a few times a week','<strong>Light users:</strong> open Vidio only when they want to watch something specific']},
+  'Testing a spread of usage habits mattered here. Heavy users already know the app well, while light users are closer to a first-time experience, so the results show how the feature works for both.']},
+ {h:'Testing results',v:'st',d:[['73.3%','task success (22 of 30)'],['37s','average time on task'],['4.0','average errors, in clicks'],['2.2/5','perceived difficulty']],b:[
+  {kv:[['Task success','73.3% (22 of 30 participants)'],['Time on task','37 seconds on average'],['Errors','4.0 clicks per participant'],['Difficulty','2.2 / 5 (1 = very easy, 5 = very difficult)']]},
+  'Participants rated the flow as fairly easy (2.2 out of 5), but about 1 in 4 did not complete the task, and the average participant made around 4 extra clicks.',
+  {note:'The sample size is small (10 per group), so these results are directional and meant to surface usability issues, not to predict exact post-launch performance.'}]},
+ {h:'Expected impact',v:'rows',d:[['Personalized experience','Feedback interaction rate'],['Content relevance','Recommendation click-through'],['Better discovery','Time-to-first-play'],['Fewer misses','“Not Interested” repeat rate'],['Retention','Watch time, 30-day retention']],b:[
+  'These are target hypotheses defined before launch, not measured results.',
+  {ul:['<strong>Personalized experience:</strong> feedback interaction rate (users who give at least one feedback per session) shows meaningful adoption among active users.','<strong>Higher content relevance:</strong> recommendation click-through rate increases vs. control group.','<strong>Better discovery:</strong> time-to-first-play from homepage decreases vs. control group.','<strong>Fewer irrelevant recommendations:</strong> “Not Interested” repeat rate for the same category decreases over time as the system learns.','<strong>Retention:</strong> watch time per user and 30-day retention increase vs. control group.']}]},
+ {h:'Reflection',v:'rows',d:[['Context','matters more than features'],['Research','comes from unexpected places'],['Copy','is design'],['Testing','shows the real gaps']],b:[
+  {ul:['<strong>Context matters more than features.</strong> A feature can be well designed but still fail if it competes with the screen’s main goal. Understanding that the homepage’s job is conversion shaped every decision I made.','<strong>Research can come from unexpected places.</strong> The <em>A Business Proposal</em> case turned a cultural moment into a clear design principle: posters carry the information people use to decide.','<strong>Copy is design.</strong> Small wording choices, like asking instead of assuming, change how users perceive the system.','<strong>Testing shows where the real gaps are.</strong> A flow can feel easy and still lose a quarter of users. Pairing success rate with perceived difficulty gave a more honest picture than either metric alone.','<strong>Next steps:</strong> if I continued this work, I would improve the discoverability of the long-press gesture, re-test, and then measure whether feedback actually improves recommendation quality over time.']},
+  {thanks:1}]}
+]};
+const WORKS=[{t:'Helping Vidio Users Find What They Love',d:'Designing an explicit feedback system that turns Vidio’s mobile homepage from a generic catalog into a personalized one.',study:VIDIO,img:'assets/projects/project-01.webp',orient:'landscape'},{t:'Lumen Design System',d:'A scalable component library used by six product teams.',img:'assets/projects/project-02.webp',orient:'landscape'},{t:'Atlas Travel Platform',d:'An end-to-end booking flow that cut drop-off by a third.',img:'assets/projects/project-03.webp',orient:'landscape'},{t:'Verde Brand & Web',d:'Identity and website for a sustainable-goods startup.',img:'assets/projects/project-04.webp',orient:'landscape'}];
 /* ----------------- */
 /* CASE STUDY: one block per scroll step. v = which visual shows on the left (cover | flow | ui | system | result). To give one project its own story, add cs:[...] to that WORKS item. */
 const CASE=[
@@ -378,11 +491,19 @@ const V={
   return `<svg class="v-flow" viewBox="0 0 580 400" aria-hidden="true">${p('M150 200C190 200 190 80 225 80',0)+p('M150 200C190 200 190 320 225 320',1)+p('M355 80C395 80 395 200 430 200',2)+p('M355 320C395 320 395 200 430 200',3)}${n(20,168,'Lorem','a',0)+n(225,48,'Ipsum','',1)+n(225,288,'Dolor','',2)+n(430,168,'Sit amet','z',3)}</svg>`},
  system:()=>{const sw=[['#0A64BC','#fff'],['#06223F','#fff'],['#F3F1EC','#06223F'],['#D5D2CC','#06223F']];
   return `<div class="v-sys"><div class="sws">${sw.map((c,n)=>`<div class="sk" style="--i:${n};background:${c[0]};color:${c[1]}"><span>${c[0]}</span></div>`).join('')}</div><div class="ty"><div class="sk" style="--i:4"><b class="f1">Aa</b><span>Fraunces</span></div><div class="sk" style="--i:5"><b class="f2">Aa</b><span>Inter</span></div></div></div>`},
+ cmp:(w,d)=>{const c=(x,k)=>`<div class="${k}"><h4>${x[0]}</h4>${x[1].map(t=>`<p>${t}</p>`).join('')}</div>`;return `<div class="v-cmp">${c(d.a,'')+c(d.b,'b')}</div>`},
+ st:(w,d)=>`<div class="v-st">${d.map((x,n)=>`<div class="sk" style="--i:${n}"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('')}</div>`,
+ rows:(w,d)=>`<div class="v-rows">${d.map((x,n)=>`<div style="--i:${n}"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('')}</div>`,
+ fn:(w,d)=>`<div class="v-fn">${d.map((x,n)=>`<div class="${x[2]?'b':''}" style="--i:${n}"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('')}</div>`,
+ shots:(w,d)=>`<div class="v-shots" style="--n:${d.items.length}">${d.items.map((x,n)=>`<figure class="sk" style="--i:${n}"><div class="ph">${x[1]}<img src="${x[0]}" alt="" onerror="this.remove()"></div><figcaption>${x[1]}</figcaption></figure>`).join('')}</div>`,
  result:()=>`<div class="v-res"><div class="rt"><div class="sk" style="--i:0"></div><div class="sk s" style="--i:1"></div></div><div class="bars">${[30,44,38,66,90].map((h,n)=>`<i class="${n===4?'h':''}" style="--h:${h};--i:${n}"></i>`).join('')}</div><div class="rl">${[0,1,2,3,4].map(n=>`<div class="sk" style="--i:${n+5}"></div>`).join('')}</div></div>`
 };
-const build=k=>{const w=WORKS[k],c=w.cs||CASE;
- sc.innerHTML=`<div class="cs-in">${c.map((s,n)=>`<section class="cs-s">${n?'':`<h1>${w.t}</h1><p class="lead">${w.d}</p>`}<h2>${s.h}</h2>${s.p.map(t=>`<p>${t}</p>`).join('')}</section>`).join('')}</div>`;
- st.innerHTML=c.map(s=>`<div class="cs-v next" aria-hidden="true">${(V[s.v]||V.cover)(w)}</div>`).join('')+`<div class="cs-dots">${c.map((s,n)=>`<button type="button" aria-label="Go to section ${n+1}" data-n="${n}"></button>`).join('')}</div>`;
+const bl=x=>typeof x==='string'?`<p>${x}</p>`:x.h3?`<h3>${x.h3}</h3>`:x.ul?`<ul>${x.ul.map(i=>`<li>${i}</li>`).join('')}</ul>`:x.ol?`<ol>${x.ol.map(i=>`<li>${i}</li>`).join('')}</ol>`:x.quote?`<blockquote>${x.quote}</blockquote>`:x.note?`<p class="note">${x.note}</p>`:x.kv?`<dl>${x.kv.map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('')}</dl>`:x.thanks?`<div class="thx"><p class="nm">Thank you</p><p><strong>Ali Hafidz</strong></p><p><a href="mailto:alihafidz180@gmail.com">alihafidz180@gmail.com</a> · +62 896 8731 0617</p><p>More work: <a href="https://halo-dz.framer.website" target="_blank" rel="noopener">halo-dz.framer.website</a></p></div>`:'';
+const build=k=>{const w=WORKS[k],u=w.study||{},c=u.sections||w.cs||CASE;
+ cs.style.setProperty('--acc',u.acc||'');
+ const head=`<h1>${u.title||w.t}</h1><p class="lead">${u.sub||w.d}</p>${u.meta?`<dl>${u.meta.map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('')}</dl>`:''}${u.tested?`<p class="note">${u.tested}</p>`:''}`;
+ sc.innerHTML=`<div class="cs-in">${c.map((s,n)=>`<section class="cs-s">${n?'':head}<h2>${s.h}</h2>${(s.b||s.p).map(bl).join('')}</section>`).join('')}</div>`;
+ st.innerHTML=c.map(s=>`<div class="cs-v next" aria-hidden="true">${(V[s.v]||V.cover)(w,s.d)}</div>`).join('')+`<div class="cs-dots">${c.map((s,n)=>`<button type="button" aria-label="Go to section ${n+1}" data-n="${n}"></button>`).join('')}</div>`;
  secs=[...sc.querySelectorAll('.cs-s')];vs=[...st.querySelectorAll('.cs-v')];ds=[...st.querySelectorAll('.cs-dots button')]};
 /* which block is being read decides which visual is on stage */
 const sync=()=>{
