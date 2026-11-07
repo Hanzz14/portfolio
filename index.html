@@ -77,7 +77,7 @@ html,body{overscroll-behavior:none}.ov:not(.on) *{pointer-events:none!important}
 .wk{top:auto;bottom:calc(12vh + env(safe-area-inset-bottom,0px))}.wk .btn{height:36px;padding:0 18px;font-size:10.5px}.arr{display:none}.ucard .btn{height:42px;padding:0 22px;font-size:12px}.ur{gap:10px}.dr{font-size:12.5px}}
 
 /* ===== Case study page (slides up from the bottom) ===== */
-#cs{--acc:var(--blue);position:fixed;inset:0;z-index:13;display:flex;flex-direction:column;background:#f3f1ec;color:var(--navy);transform:translate3d(0,100%,0);visibility:hidden;transition:transform .95s cubic-bezier(.77,0,.18,1),visibility 0s .95s;box-shadow:0 -30px 80px -30px rgba(6,34,63,.55)}
+#cs{--acc:var(--blue);--accx:var(--acc);--onacc:#fff;position:fixed;inset:0;z-index:13;display:flex;flex-direction:column;background:#f3f1ec;color:var(--navy);transform:translate3d(0,100%,0);visibility:hidden;transition:transform .95s cubic-bezier(.77,0,.18,1),visibility 0s .95s;box-shadow:0 -30px 80px -30px rgba(6,34,63,.55)}
 #cs.on{transform:none;visibility:visible;transition:transform .95s cubic-bezier(.77,0,.18,1),visibility 0s}
 .cs-top{position:relative;flex:none;height:calc(64px + env(safe-area-inset-top,0px));display:flex;align-items:center;justify-content:space-between;padding:env(safe-area-inset-top,0px) 28px 0;border-bottom:1px solid rgba(6,34,63,.1)}
 .cs-top::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--acc);transform:scaleX(var(--sp,0));transform-origin:left}
@@ -131,7 +131,8 @@ html,body{overscroll-behavior:none}.ov:not(.on) *{pointer-events:none!important}
 .fn text{font:500 15px Inter,sans-serif;fill:var(--navy)}
 .fn.a rect{fill:var(--acc);stroke:none}
 .fn.z rect{fill:var(--navy);stroke:none}
-.fn.a text,.fn.z text{fill:#fff}
+.fn.a text{fill:var(--onacc)}
+.fn.z text{fill:#fff}
 /* visual: system */
 .v-sys{width:min(82cqw,calc(64cqh*1.5));aspect-ratio:1.5;display:grid;grid-template-columns:1.1fr 1fr;gap:4%;transform:translate3d(0,calc((.5 - var(--p,0))*20px),0)}
 .v-sys .sws{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:6%}
@@ -165,30 +166,30 @@ html,body{overscroll-behavior:none}.ov:not(.on) *{pointer-events:none!important}
 .cs-s .lead{font-size:16px;margin-bottom:1.6em}
 }
 /* rich text blocks */
-.cs-s h3{font:600 12px/1.4 Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);margin:2.2em 0 .9em}
+.cs-s h3{font:600 12px/1.4 Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--accx);margin:2.2em 0 .9em}
 .cs-s strong{color:var(--navy);font-weight:600}
 .cs-s ul,.cs-s ol{max-width:56ch;margin:0 0 1.4em;padding-left:1.25em;font-size:clamp(15px,1.1vw,17px);line-height:1.7;color:var(--mute)}
 .cs-s li{margin:0 0 .55em;padding-left:.3em}
-.cs-s li::marker{color:var(--acc);font-weight:600}
+.cs-s li::marker{color:var(--accx);font-weight:600}
 .cs-s blockquote{max-width:46ch;margin:1.8em 0;padding:.1em 0 .1em 1.2em;border-left:3px solid var(--acc);font:300 clamp(19px,1.6vw,25px)/1.4 Fraunces,Georgia,serif;color:var(--navy)}
 .cs-s .note{font-size:13px;line-height:1.6;font-style:italic;color:#6b7783}
 .cs-s dl{display:grid;grid-template-columns:max-content 1fr;gap:.9em 1.6em;max-width:56ch;margin:0 0 1.6em;font-size:clamp(14px,1.05vw,16px);line-height:1.6}
-.cs-s dt{font:600 11px/1.9 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
+.cs-s dt{font:600 11px/1.9 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--accx)}
 .cs-s dd{margin:0;color:var(--mute)}
 .cs-s .thx{margin-top:2.4em;padding-top:1.6em;border-top:1px solid rgba(6,34,63,.14)}
 .cs-s .thx .nm{font:300 clamp(26px,2.3vw,38px)/1.1 Fraunces,Georgia,serif;color:var(--navy);margin:0 0 .5em}
 .cs-s .thx p{margin:0 0 .4em}
-.cs-s .thx a{color:var(--acc);text-decoration:none;border-bottom:1px solid currentColor}
+.cs-s .thx a{color:var(--accx);text-decoration:none;border-bottom:1px solid currentColor}
 /* new visuals */
 .v-cmp{width:min(86cqw,calc(66cqh*1.55));display:grid;grid-template-columns:1fr 1fr;gap:5%;transform:translate3d(0,calc((.5 - var(--p,0))*20px),0)}
 .v-cmp>div{background:#fff;border-radius:18px;padding:9% 8%;box-shadow:0 30px 60px -30px rgba(6,34,63,.4)}
-.v-cmp>div.b{background:var(--acc);color:#fff}
+.v-cmp>div.b{background:var(--acc);color:var(--onacc)}
 .v-cmp h4{margin:0 0 1.1em;font:300 max(18px,3.4cqmin)/1.1 Fraunces,Georgia,serif}
 .v-cmp p{margin:0 0 .8em;padding-top:.8em;border-top:1px solid rgba(6,34,63,.12);font:400 max(12px,2.2cqmin)/1.4 Inter,sans-serif;color:var(--mute)}
-.v-cmp .b p{border-color:rgba(255,255,255,.3);color:#fff}
+.v-cmp .b p{border-color:color-mix(in srgb,currentColor 25%,transparent);color:var(--onacc)}
 .v-st{width:min(84cqw,calc(70cqh*1.3));display:grid;grid-template-columns:repeat(2,1fr);gap:5%;transform:translate3d(0,calc((.5 - var(--p,0))*20px),0)}
 .v-st>div{background:#fff;border-radius:18px;padding:9% 8%;box-shadow:0 30px 60px -30px rgba(6,34,63,.4)}
-.v-st>div:first-child{background:var(--acc);color:#fff}
+.v-st>div:first-child{background:var(--acc);color:var(--onacc)}
 .v-st>div:last-child:nth-child(odd){grid-column:1/-1}
 .v-st b{display:block;font:300 max(30px,9.5cqmin)/1 Fraunces,Georgia,serif}
 .v-st span{display:block;margin-top:.7em;font:400 max(12px,2.1cqmin)/1.4 Inter,sans-serif;opacity:.75}
@@ -200,7 +201,7 @@ html,body{overscroll-behavior:none}.ov:not(.on) *{pointer-events:none!important}
 .v-rows span{font:400 max(12px,2.1cqmin)/1.4 Inter,sans-serif;color:var(--mute);text-align:right}
 .v-fn{width:min(80cqw,calc(62cqh*1.4));display:grid;gap:5%;transform:translate3d(0,calc((.5 - var(--p,0))*20px),0)}
 .v-fn>div{border-radius:16px;padding:6% 8%;background:#fff;box-shadow:0 24px 50px -28px rgba(6,34,63,.4);opacity:0;transform:translateY(14px);transition:opacity .7s,transform .7s cubic-bezier(.2,.7,.2,1)}
-.v-fn>div.b{background:var(--acc);color:#fff}
+.v-fn>div.b{background:var(--acc);color:var(--onacc)}
 .cs-v.on .v-fn>div{opacity:1;transform:none;transition-delay:calc(var(--i,0)*110ms + 200ms)}
 .v-fn b{display:block;font:300 max(19px,3.6cqmin)/1.1 Fraunces,Georgia,serif}
 .v-fn span{display:block;margin-top:.5em;font:400 max(12px,2.1cqmin)/1.4 Inter,sans-serif;opacity:.7}
@@ -211,22 +212,37 @@ html,body{overscroll-behavior:none}.ov:not(.on) *{pointer-events:none!important}
 .v-shots figcaption{margin-top:6%;text-align:center;font:500 max(11px,1.9cqmin)/1.3 Inter,sans-serif;letter-spacing:.04em;color:var(--navy)}
 @media (orientation:portrait){.cs-s h3{margin-top:1.8em}.v-shots figure{max-width:calc(80cqh*.46)}.v-cmp>div,.v-st>div{padding:7% 6%}}
 
-.cs-s dd a{color:var(--acc);text-decoration:none;border-bottom:1px solid currentColor}
+.cs-s dd a{color:var(--accx);text-decoration:none;border-bottom:1px solid currentColor}
 .cs-s .tw{overflow-x:auto;max-width:100%;margin:0 0 1.6em}
 .cs-s table{border-collapse:collapse;width:100%;font-size:13px;line-height:1.45}
-.cs-s th{padding:.6em .9em .6em 0;border-bottom:1px solid rgba(6,34,63,.22);font:600 10.5px/1.4 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);text-align:left;white-space:nowrap}
+.cs-s th{padding:.6em .9em .6em 0;border-bottom:1px solid rgba(6,34,63,.22);font:600 10.5px/1.4 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--accx);text-align:left;white-space:nowrap}
 .cs-s td{padding:.75em .9em .75em 0;border-bottom:1px solid rgba(6,34,63,.09);color:var(--mute);vertical-align:top}
 .cs-s td:first-child{color:var(--navy);font-weight:600}
-.v-web{position:relative;width:min(86cqw,calc(70cqh*1.6));transform:translate3d(0,calc((.5 - var(--p,0))*22px),0)}
-.v-web .bw,.v-web .pm{position:relative;overflow:hidden;background:#fff;display:grid;place-items:center;padding:6%;text-align:center;font:400 max(11px,1.9cqmin)/1.4 Inter,sans-serif;color:#8a949e;box-shadow:0 36px 70px -30px rgba(6,34,63,.5),inset 0 0 0 1px rgba(6,34,63,.1)}
-.v-web .bw{aspect-ratio:16/10;border-radius:14px}
-.v-web .pm{position:absolute;right:-3%;bottom:-9%;width:21%;aspect-ratio:9/19;border-radius:12% / 5.5%;padding:3%}
-.v-web img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rv{opacity:0;transform:translateY(14px);transition:opacity .7s,transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:0s}
+.cs-v.on .rv{opacity:1;transform:none;transition-delay:calc(var(--i,0)*120ms + 200ms)}
+.v-web{position:relative;width:min(88cqw,calc(74cqh*1.65));transform:translate3d(0,calc((.5 - var(--p,0))*22px),0)}
+.v-web .dk{display:block;width:100%;height:auto;filter:drop-shadow(0 28px 36px rgba(6,34,63,.28))}
+.v-web .pm{position:absolute;right:-1%;bottom:-6%;width:19%;height:auto;filter:drop-shadow(0 20px 28px rgba(6,34,63,.38))}
+.v-kv{width:min(90cqw,calc(80cqh*1.94));display:flex;gap:3%;align-items:center;transform:translate3d(0,calc((.5 - var(--p,0))*22px),0)}
+.v-kv>img{flex:0 0 38.5%;min-width:0}
+.v-kv>div{flex:1;min-width:0;display:flex;flex-direction:column;gap:max(8px,1.6cqh)}
+.v-kv img{display:block;width:100%;height:auto;filter:drop-shadow(0 16px 22px rgba(6,34,63,.22))}
+.v-pic img{display:block;width:min(82cqw,78cqh);height:auto;filter:drop-shadow(0 28px 36px rgba(6,34,63,.3))}
+.v-ph{display:flex;justify-content:center;gap:3%;width:min(90cqw,calc(86cqh*1.4));transform:translate3d(0,calc((.5 - var(--p,0))*22px),0)}
+.v-ph figure{flex:1;margin:0;min-width:0;max-width:calc(72cqh*.49)}
+.v-ph img{display:block;width:100%;height:auto;filter:drop-shadow(0 22px 30px rgba(6,34,63,.3))}
+.v-ph figcaption{margin-top:5%;text-align:center;font:500 max(11px,1.9cqmin)/1.3 Inter,sans-serif;color:var(--navy)}
+.v-ic{width:min(84cqw,calc(76cqh*.95));display:grid;gap:max(12px,3.2cqh);transform:translate3d(0,calc((.5 - var(--p,0))*20px),0)}
+.v-ic>div{display:grid;grid-template-columns:auto 1fr;gap:max(14px,2.4cqw);align-items:center}
+.v-ic i{display:grid;place-items:center;width:min(12cqmin,56px);aspect-ratio:1;border-radius:50%;background:var(--acc);color:var(--onacc)}
+.v-ic svg{width:48%;height:48%}
+.v-ic b{display:block;font:300 max(18px,3.6cqmin)/1.15 Fraunces,Georgia,serif;color:var(--navy)}
+.v-ic span{display:block;margin-top:.3em;font:400 max(12px,2.1cqmin)/1.4 Inter,sans-serif;color:var(--mute)}
 .v-cta{width:min(78cqw,calc(60cqh*1.1));display:grid;gap:6%;transform:translate3d(0,calc((.5 - var(--p,0))*20px),0)}
 .v-cta>div{border-radius:22px;padding:9%;color:#fff;box-shadow:0 30px 60px -30px rgba(6,34,63,.45)}
 .v-cta b{display:block;font:500 max(20px,4.2cqmin)/1.1 Inter,sans-serif}
 .v-cta span{display:block;margin-top:.6em;font:400 max(12px,2.1cqmin)/1.4 Inter,sans-serif;opacity:.85}
-@media (orientation:portrait){.v-rows{padding:1.5% 6%;width:min(88cqw,420px)}.v-rows>div{padding:2.4% 0}.v-rows b{font-size:16px}.v-rows span{font-size:12px}}
+@media (orientation:portrait){.v-ic{gap:max(8px,2cqh);width:min(88cqw,380px)}.v-rows{padding:1.5% 6%;width:min(88cqw,420px)}.v-rows>div{padding:2.4% 0}.v-rows b{font-size:16px}.v-rows span{font-size:12px}}
 
 @media (prefers-reduced-motion:reduce){#cs,#cs.on{transition-duration:.01s}.cs-v,.sk,.fn,.v-flow path,.v-res .bars i{transition-duration:.01s!important;transition-delay:0s!important}}
 
@@ -256,14 +272,14 @@ const HISTORY=[/* [date, title, company, one-line achievement] */['2024 – Pres
 const TESTIMONIALS=[{q:'Very easy to work with, very thorough, great productivity, creativity and detail oriented.',n:'Che Monagan',r:'Founder of PharmaChelation'},{q:'If you’re looking for a professional designer, you’re in the right place with Ali. He’s a very talented designer who can create beautiful applications. He completed everything on time and responded quickly to all my questions. He also took my feedback into account throughout the design process. I would definitely hire him again.',n:'Moritz Heschl',r:'Founder of Clipzy'},{q:'Ali is a very skilled UX/UI designer. He audited our webapp and was able to come up with multiple effective redesigns based on our market segmentation. I would definitely recommend him and looking forward to working with him again.',n:'Mike M',r:'Founder of DayOD'}];
 /* img = path to cover (1920×1080 landscape, 1080×1920 if orient:'portrait'). Replace the files in assets/projects/ or change the paths. */
 /* WORK 1 CASE STUDY (HOMEDEC 2026). Text blocks: 'string' = paragraph, {h3},{ul},{ol},{quote},{note},{kv},{tbl:{h:[],r:[[]]}},{thanks:1}. v = visual: web | shots | cmp | st | rows | fn | cta. d = visual data. */
-const HOMEDEC={acc:'#5E3A8F',title:'One Event, Three Audiences: Designing the HOMEDEC 2026 Website',sub:'UI design for Indonesia’s home renovation and interior exhibition',
+const HOMEDEC={acc:'#69BA45',accx:'#2F7A1F',onacc:'#06223F',title:'HOMEDEC 2026 Website',sub:'Contributed to a 10.7% increase in visitors from last year',
  meta:[['Role','Freelance UI / Web Designer (partnering with Krona Digital Agency)'],['Client','CIS Exhibition, organizer of HOMEDEC'],['Year','2026'],['Duration','~2 months'],['Team','Me (designer), Visual Director and Developers from Krona Digital Agency'],['Project management','Krona Digital Agency'],['Tools','Figma, Affinity'],['Live site','<a href="https://homedec.co.id/" target="_blank" rel="noopener">homedec.co.id</a>'],['Key visual','Tedanesia Creative Studio']],
  tested:'Event result: 28,000 visitors (+10.7% vs 2025) · Google PageSpeed: 92 SEO and 100 Best Practices on most pages.',
  sections:[
- {h:'Overview',v:'web',d:{items:[['assets/homedec/hero.webp','Hero: homepage, desktop'],['assets/homedec/hero-m.webp','Mobile']]},b:[
+ {h:'TL;DR',v:'web',d:{items:[['assets/homedec/home.webp','HOMEDEC homepage on desktop'],['assets/homedec/home-m.webp','HOMEDEC homepage on mobile']]},b:[
   'HOMEDEC 2026 is a four-day home renovation and interior exhibition held at ICE BSD, Hall 6 (22 to 25 October 2026). Its website had to serve three very different audiences: the general public, exhibition visitors, and brands considering a booth. I designed the website from a key visual and page structure provided by the agency, turning a vibrant, gradient-heavy KV into a clear, responsive interface where each audience quickly finds its own path and its own call to action.',
-  'The event drew 28,000 visitors, 1,000 above its 27,000 target. Since I did not have access to the website’s internal analytics, this case study uses third-party tools (Google PageSpeed Insights, SimilarWeb, Semrush, and Google Search) to show how the website performed.']},
- {h:'The event',v:'st',d:[['27,000','visitor target'],['Rp50B','projected transactions'],['101','exhibitors the year before'],['4 days','22 to 25 Oct 2026, ICE BSD Hall 6']],b:[
+  'The event drew 28,000 visitors, 1,000 above its 27,000 target.']},
+ {h:'Overview',v:'st',d:[['27,000','visitor target'],['Rp50B','projected transactions'],['101','exhibitors the year before'],['4 days','22 to 25 Oct 2026, ICE BSD Hall 6']],b:[
   'HOMEDEC is a long-running exhibition where homeowners, interior designers, and contractors discover renovation products, compare options, and shop. The 2026 edition was projected to reach 27,000 visitors and Rp50 billion in transactions, after 101 exhibitors took part the previous year.',
   'For an event of this size, the website is the front door. It has to answer different questions for different people:',
   {ul:['<em>“What is happening at the exhibition, and is it worth my time?”</em>','<em>“Why should my brand take a booth?”</em>']},
@@ -281,16 +297,16 @@ const HOMEDEC={acc:'#5E3A8F',title:'One Event, Three Audiences: Designing the HO
   'The website has two layers, both built on the same design system:',
   {ul:['<strong>Main website:</strong> Home (general public), Visitor, Exhibitor, About, and Contact pages, connected by one navigation.','<strong>Promotion pages:</strong> separate Visitor Promotion and Exhibitor Promotion pages, designed as focused landing pages for promotion (for example from social media), each leading straight to registration.']},
   'The goal was to make sure a first-time visitor to the website could answer “is this for me?” within seconds, and always see the next step.']},
- {h:'Challenges',v:'rows',d:[['Third-party chain','Approvals through the agency'],['Large-scale event','Credible within ~2 months'],['Vibrant KV','Without overwhelming content'],['Three audiences','One structure, one system'],['Every screen size','About half of traffic on mobile']],b:[
+ {h:'Challenges',v:'icons',d:[['link','Third-party chain','Approvals through the agency'],['cal','Large-scale event','Credible within ~2 months'],['layers','Vibrant KV','Without overwhelming content'],['users','Three audiences','One structure, one system'],['phone','Every screen size','About half of traffic on mobile']],b:[
   {ol:['<strong>Communicating through a third-party chain.</strong> I worked with the agency, not directly with the client, so design decisions needed to be easy to explain and easy to approve. I prepared clear rationale for each key decision so the visual director could present it confidently, which kept revision rounds minor.','<strong>Meeting the expectations of a large-scale event.</strong> HOMEDEC is a major exhibition with many partners, sponsors, and a high visitor target. The website had to look credible and polished to both brands deciding whether to invest in a booth and the public deciding whether to attend, within roughly two months.','<strong>Applying a vibrant KV without overwhelming the content.</strong> The KV is colorful, with gradients, circles, and layered shapes. Used everywhere, it would compete with the information people came for.','<strong>One structure for three audiences.</strong> Each audience needed different content and a different call to action, without making the website feel like three disconnected sites.','<strong>Responsive design at every size.</strong> Based on third-party data, about half of the traffic came from mobile (see Results), so mobile could not be an afterthought.']}]},
- {h:'Let the KV frame the content',v:'web',d:{items:[['assets/homedec/kv.webp','Key visual in the hero and section edges'],['assets/homedec/kv-m.webp','Mobile']]},b:[
+ {h:'Let the KV frame the content',v:'kv',d:{items:[['assets/homedec/kv-1.webp','Key visual in the sections page'],['assets/homedec/kv-2.webp','Key visual in the gallery section'],['assets/homedec/kv-3.webp','Key visual in the join banner']]},b:[
   'The KV’s gradients and modular shapes are used where they have the most impact: the hero, section edges, and corners. In between, the content sits on calm, light backgrounds with strong text contrast. Color blocks (purple, orange, green) mark the boundaries between sections, so the page has rhythm without every area being busy.',
   {quote:'The result is a page that clearly feels like HOMEDEC, but where the information stays the main focus.'}]},
- {h:'One path, one color per audience',v:'cta',d:[['Registrasi Pengunjung','For visitors','#2F8F5B'],['Pesan Booth','For exhibitors','#E5702A']],b:[
+ {h:'One path, one color per audience',v:'pic',d:{items:[['assets/homedec/cta.webp','Hero buttons: Informasi Peserta (green) and Pesan Booth (orange)']]},b:[
   'Calls to action are consistent and repeated at natural decision points (hero, mid-page, and footer):',
   {ul:['<strong>Visitors:</strong> a green “Registrasi Pengunjung” button','<strong>Exhibitors:</strong> an orange “Pesan Booth” button']},
   'Using the same two colors for the same two actions across all pages teaches users the system quickly, and makes it obvious which action is for whom.']},
- {h:'Home page: orient, then route',v:'web',d:{items:[['assets/homedec/home.webp','Home page, desktop'],['assets/homedec/home-m.webp','Mobile']]},b:[
+ {h:'Home Page: Select Direction, then Route',v:'web',d:{items:[['assets/homedec/home.webp','HOMEDEC homepage on desktop'],['assets/homedec/home-m.webp','HOMEDEC homepage on mobile']]},b:[
   'The home page introduces the event (what, when, where), then splits attention between the two audiences with the “Kunjungi HOMEDEC 2026!” section for visitors and the “Bergabunglah di HOMEDEC 2026” section for brands. Brand highlights and partner logos build credibility. Its job is to route people, not to overload them.']},
  {h:'Visitor promotion page',v:'web',d:{items:[['assets/homedec/visitor-promo.webp','Visitor promotion page, desktop'],['assets/homedec/visitor-promo-m.webp','Mobile']]},b:[
   'The visitor promotion page leads with what visitors care about most: what they can win and what they can see. It includes:',
@@ -298,34 +314,34 @@ const HOMEDEC={acc:'#5E3A8F',title:'One Event, Three Audiences: Designing the HO
  {h:'Exhibitor promotion page',v:'web',d:{items:[['assets/homedec/exhibitor-promo.webp','Exhibitor promotion page, desktop'],['assets/homedec/exhibitor-promo-m.webp','Mobile']]},b:[
   'For brands, the exhibitor promotion page answers “is it worth it?” before asking for commitment:',
   {ul:['A strategic pitch about HOMEDEC as a platform for brands','Participant profiles and target audience types (contractors, commercial sector, big spenders)','A side-by-side of HOMEDEC 2025’s results and 2026 projections','Testimonials from past exhibitors','A registration form at the end of the page']}]},
- {h:'A system that scales to every screen',v:'shots',d:{items:[['assets/homedec/m-nav.webp','Menu collapses'],['assets/homedec/m-cards.webp','Cards stack'],['assets/homedec/m-logos.webp','Logo grids stay readable']]},b:[
-  'I designed reusable components (cards, carousels, logo grids, section headers, CTA blocks) that reflow cleanly: navigation collapses into a menu on mobile, card grids stack into single columns, and dense partner logo sections stay readable. The same visual language holds from large desktop screens to phones.',
-  {h3:'Collaboration'},
+ {h:'A system that scales to every screen',v:'phones',d:{items:[['assets/homedec/m-nav.webp','Menu collapses'],['assets/homedec/m-cards.webp','Cards stack'],['assets/homedec/m-logos.webp','Logo grids stay readable']]},b:[
+  'I designed reusable components (cards, carousels, logo grids, section headers, CTA blocks) that reflow cleanly: navigation collapses into a menu on mobile, card grids stack into single columns, and dense partner logo sections stay readable. The same visual language holds from large desktop screens to phones.']},
+ {h:'Collaboration',v:'icons',d:[['eye','Visual director','Aligned on how far to push the KV'],['code','Developers','Specs, handoff, build checks'],['redo','Revisions','Only minor changes after review']],b:[
   {ul:['<strong>With the visual director:</strong> aligned on how far to push the KV on each page and approved design direction.','<strong>With the developers:</strong> prepared design files and specs for handoff, and checked the built pages against the designs.','<strong>Revisions:</strong> only minor changes were needed after review.']}]},
  {h:'Results: the event',v:'st',d:[['28,000','visitors'],['+10.7%','vs. 25,300 visitors in 2025'],['+1,000','over the 27,000 target (about +3.7%)']],b:[
-  'The website is live and the event has concluded. I did not have access to the website’s internal analytics, so the results below come from public sources and third-party tools. Figures from third-party estimators are estimates and are labeled as such.',
+  'The website is live and the event has concluded. Here is how the event and the website performed.',
   {h3:'Event results (reported by the organizer)'},
-  {tbl:{h:['Metric','Result','Source'],r:[['Visitors','28,000','HOMEDEC official Instagram (@homedec_id)'],['vs. target','+1,000 over the 27,000 target (about +3.7%)','Target: Koran Jakarta, 23 Oct 2026'],['vs. previous year','+10.7% vs. 25,300 visitors in 2025','2025 figure: HOMEDEC website']]}},
+  {tbl:{h:['Metric','Result'],r:[['Visitors','28,000'],['vs. target','+1,000 over the 27,000 target (about +3.7%)'],['vs. previous year','+10.7% vs. 25,300 visitors in 2025']]}},
   {note:'The website was one of several channels for registration and promotion. These numbers reflect the success of the event as a whole, not the website alone.'}]},
  {h:'Results: website performance',v:'st',d:[['100','Best Practices on most pages'],['92','SEO on most pages'],['84–96','desktop performance'],['47–86','mobile performance']],b:[
-  'Google PageSpeed Insights, tested 6 Nov 2026. Each cell shows Mobile / Desktop.',
+  'Google PageSpeed Insights. Each cell shows Mobile / Desktop.',
   {tbl:{h:['Page','Performance','Accessibility','Best Practices','SEO'],r:[['Home','47 / 84','92 / 89','100 / 100','92 / 92'],['Visitor (main site)','78 / 96','89 / 89','100 / 100','92 / 85'],['Exhibitor (main site)','64 / 85','89 / 88','96 / 96','92 / 92'],['Visitor promotion','61 / 94','90 / 91','100 / 100','92 / 92'],['Exhibitor promotion','72 / 94','91 / 92','100 / 100','92 / 92'],['About','86 / 91','88 / 88','100 / 100','92 / 92'],['Contact','83 / 91','90 / 90','100 / 100','92 / 92']]}},
   {ul:['<strong>Strong fundamentals across every page:</strong> Best Practices scored 96 to 100, SEO 85 to 92, and Accessibility 88 to 92.','<strong>Desktop performance was solid:</strong> 84 to 96 on all pages.','<strong>Mobile performance was mixed (47 to 86).</strong> The pages carry a lot of imagery (event photos, banners, and dozens of partner logos), which is a natural trade-off for an event website. This is an area the developers can improve by compressing images and serving them in smaller, more efficient formats.']},
   '<strong>What I would improve next:</strong> work with the developers to compress images and use smaller image formats, especially for the partner logo sections and banners, then re-test mobile performance.']},
- {h:'Results: traffic and search',v:'st',d:[['4,941','visits in Oct 2026, up 133.64%'],['3:51','avg. visit duration (Sep 2026)'],['3.81','pages per visit (Sep 2026)'],['51.95%','of visits on mobile web']],b:[
-  {h3:'Traffic (SimilarWeb, estimates)'},
-  {tbl:{h:['Metric','Result'],r:[['Monthly visits, Jul → Aug → Sep 2026','1.6K → 2.5K → 2.1K'],['Visits in Oct 2026 (event month)','4,941, up 133.64% from the previous month'],['Avg. visit duration (Sep 2026)','3 min 51 sec'],['Pages per visit (Sep 2026)','3.81'],['Bounce rate (Sep 2026)','42.95%'],['Device split (Oct 2026)','51.95% mobile web / 48.05% desktop']]}},
+ {h:'Results: traffic and search',v:'st',d:[['4,941','visits in Oct 2026, up 133.64%'],['3:51','avg. visit duration (Sep 2026)'],['3.81','pages per visit'],['#1','Google rank for “homedec 2026”']],b:[
+  {h3:'Traffic'},
+  {tbl:{h:['Metric','Result'],r:[['Monthly visits, Jul → Aug → Sep 2026','1.6K → 2.5K → 2.1K'],['Visits in Oct 2026 (event month)','4,941, up 133.64% from the previous month'],['Avg. visit duration (Sep 2026)','3 min 51 sec'],['Pages per visit','3.81'],['Bounce rate','42.95%'],['Device split','51.95% mobile web / 48.05% desktop']]}},
   'The device split confirmed that designing mobile-first and desktop equally was the right call: more than half of the visits came from mobile.',
-  {note:'SimilarWeb data are estimates for a relatively small site and may not match internal analytics.'},
   {h3:'Search visibility (Google Search, incognito, Indonesia)'},
   {tbl:{h:['Keyword','Position'],r:[['homedec 2026','#1'],['homedec indonesia','#1'],['pameran renovasi rumah','#2 (after HOMEDEC’s official Instagram)'],['pameran interior','#2 (after HOMEDEC’s official Instagram)'],['pameran desain interior 2026','First page (the only other exhibition website above it)']]}},
   {note:'Tested between August and October 2026.'},
-  {h3:'Authority and reach (Semrush, estimates)'},
+  {h3:'Authority and reach'},
   {ul:['<strong>486</strong> referring domains and about <strong>8K</strong> backlinks','<strong>55</strong> organic keywords, with 85.3% branded search','<strong>29</strong> mentions in AI search platforms (ChatGPT, Gemini, and Google AI Mode)']},
   {note:'Backlinks and mentions reflect the whole HOMEDEC brand and its partners, not only the design work.'}]},
- {h:'Reflection',v:'rows',d:[['Clarity','beats decoration'],['Decisions','not just pages'],['Agency work','needs clear communication'],['Performance','be honest about it']],b:[
-  {ul:['<strong>Clarity beats decoration.</strong> The KV gave the project energy, but the website works because each page has one job and one call to action.','<strong>Design for the decision, not just the page.</strong> Visitors need a reason to come; exhibitors need proof it is worth it. Different intent, different content.','<strong>Working through an agency takes clear communication.</strong> Designs that explain themselves make approval faster, especially when you are not in the room with the client.','<strong>Be honest about performance.</strong> Strong accessibility, SEO, and desktop speed were achieved, but mobile performance has room to improve, mainly through lighter image formats on the development side.','<strong>Next steps:</strong> work with developers to reduce image weight on mobile, then measure whether registration conversion improves for each audience.']},
-  {note:'Key visual by Tedanesia Creative Studio. Event organized by CIS Exhibition. Project managed by Krona Digital Agency. Website designed by Ali Hafidz.'},
+ {h:'Reflection',v:'icons',d:[['eye','Clarity','beats decoration'],['target','Decisions','not just pages'],['msg','Clear communication','makes agency approval faster'],['zap','Improve mobile load','lighter images next']],b:[
+  {ul:['<strong>Clarity beats decoration.</strong> The KV gave the project energy, but the website works because each page has one job and one call to action.','<strong>Design for the decision, not just the page.</strong> Visitors need a reason to come; exhibitors need proof it is worth it. Different intent, different content.','<strong>Working through an agency takes clear communication.</strong> Designs that explain themselves make approval faster, especially when you are not in the room with the client.','<strong>Improve mobile load.</strong> Strong accessibility, SEO, and desktop speed were achieved, but mobile performance has room to improve, mainly through lighter image formats on the development side.','<strong>Next steps:</strong> work with developers to reduce image weight on mobile.']},
+  {h3:'Credits'},
+  'Key visual by Tedanesia Creative Studio. Event organized by CIS Exhibition. Project managed by Krona Digital Agency. Website designed by Ali Hafidz.',
   {thanks:1}]}
 ]};
 const WORKS=[{t:'HOMEDEC 2026 Website',d:'UI design for Indonesia’s biggest home renovation exhibition, built so three audiences each find their own path.',study:HOMEDEC,img:'assets/projects/project-01.webp',orient:'landscape'},{t:'Lumen Design System',d:'A scalable component library used by six product teams.',img:'assets/projects/project-02.webp',orient:'landscape'},{t:'Atlas Travel Platform',d:'An end-to-end booking flow that cut drop-off by a third.',img:'assets/projects/project-03.webp',orient:'landscape'},{t:'Verde Brand & Web',d:'Identity and website for a sustainable-goods startup.',img:'assets/projects/project-04.webp',orient:'landscape'}];
@@ -506,6 +522,7 @@ const cs=$('cs'),sc=$('csS'),st=$('csV'),X=$('csX'),RM=matchMedia('(prefers-redu
 let tg=0,cu=0,act=-1,armed=false,raf=0,lastSp=-1,secs=[],vs=[],ds=[],back=null;
 X.innerHTML='Close <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg>';
 /* left-side visuals (placeholders built from neutral components) */
+const IC={link:'<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>',cal:'<path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>',layers:'<path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>',users:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',phone:'<path d="M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM12 18h.01"/>',eye:'<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>',target:'<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>',msg:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',zap:'<path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>',code:'<path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/>',redo:'<path d="M3 12a9 9 0 0 1 15-6.7L21 8M21 3v5h-5M21 12a9 9 0 0 1-15 6.7L3 16M3 21v-5h5"/>'};
 const V={
  cover:w=>`<div class="v-cover"><img src="${w.img}" alt="" decoding="async"></div>`,
  ui:()=>{let n=0;const s=c=>`<div class="sk ${c||''}" style="--i:${n++}"></div>`;
@@ -520,13 +537,17 @@ const V={
  rows:(w,d)=>`<div class="v-rows">${d.map((x,n)=>`<div style="--i:${n}"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('')}</div>`,
  fn:(w,d)=>`<div class="v-fn">${d.map((x,n)=>`<div class="${x[2]?'b':''}" style="--i:${n}"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('')}</div>`,
  shots:(w,d)=>`<div class="v-shots" style="--n:${d.items.length}">${d.items.map((x,n)=>`<figure class="sk" style="--i:${n}"><div class="ph">${x[1]}<img src="${x[0]}" alt="" onerror="this.remove()"></div><figcaption>${x[1]}</figcaption></figure>`).join('')}</div>`,
- web:(w,d)=>`<div class="v-web"><div class="bw sk" style="--i:0">${d.items[0][1]}<img src="${d.items[0][0]}" alt="" onerror="this.remove()"></div>${d.items[1]?`<div class="pm sk" style="--i:1">${d.items[1][1]}<img src="${d.items[1][0]}" alt="" onerror="this.remove()"></div>`:''}</div>`,
+ web:(w,d)=>`<div class="v-web"><img class="dk rv" style="--i:0" src="${d.items[0][0]}" alt="${d.items[0][1]}" decoding="async">${d.items[1]?`<img class="pm rv" style="--i:1" src="${d.items[1][0]}" alt="${d.items[1][1]}" decoding="async">`:''}</div>`,
+ kv:(w,d)=>`<div class="v-kv"><img class="rv" style="--i:0" src="${d.items[0][0]}" alt="${d.items[0][1]}"><div><img class="rv" style="--i:1" src="${d.items[1][0]}" alt="${d.items[1][1]}"><img class="rv" style="--i:2" src="${d.items[2][0]}" alt="${d.items[2][1]}"></div></div>`,
+ pic:(w,d)=>`<div class="v-pic"><img class="rv" src="${d.items[0][0]}" alt="${d.items[0][1]}"></div>`,
+ phones:(w,d)=>`<div class="v-ph">${d.items.map((x,n)=>`<figure class="rv" style="--i:${n}"><img src="${x[0]}" alt="${x[1]}"><figcaption>${x[1]}</figcaption></figure>`).join('')}</div>`,
+ icons:(w,d)=>`<div class="v-ic">${d.map((x,n)=>`<div class="rv" style="--i:${n}"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${IC[x[0]]}</svg></i><div><b>${x[1]}</b><span>${x[2]}</span></div></div>`).join('')}</div>`,
  cta:(w,d)=>`<div class="v-cta">${d.map((x,n)=>`<div class="sk" style="--i:${n};background:${x[2]}"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('')}</div>`,
  result:()=>`<div class="v-res"><div class="rt"><div class="sk" style="--i:0"></div><div class="sk s" style="--i:1"></div></div><div class="bars">${[30,44,38,66,90].map((h,n)=>`<i class="${n===4?'h':''}" style="--h:${h};--i:${n}"></i>`).join('')}</div><div class="rl">${[0,1,2,3,4].map(n=>`<div class="sk" style="--i:${n+5}"></div>`).join('')}</div></div>`
 };
 const bl=x=>typeof x==='string'?`<p>${x}</p>`:x.h3?`<h3>${x.h3}</h3>`:x.ul?`<ul>${x.ul.map(i=>`<li>${i}</li>`).join('')}</ul>`:x.ol?`<ol>${x.ol.map(i=>`<li>${i}</li>`).join('')}</ol>`:x.quote?`<blockquote>${x.quote}</blockquote>`:x.note?`<p class="note">${x.note}</p>`:x.kv?`<dl>${x.kv.map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('')}</dl>`:x.tbl?`<div class="tw"><table><thead><tr>${x.tbl.h.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>${x.tbl.r.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`:x.thanks?`<div class="thx"><p class="nm">Thank you</p><p><strong>Ali Hafidz</strong></p><p><a href="mailto:alihafidz180@gmail.com">alihafidz180@gmail.com</a> · +62 896 8731 0617</p><p>More work: <a href="https://halo-dz.framer.website" target="_blank" rel="noopener">halo-dz.framer.website</a></p></div>`:'';
 const build=k=>{const w=WORKS[k],u=w.study||{},c=u.sections||w.cs||CASE;
- cs.style.setProperty('--acc',u.acc||'');
+ cs.style.setProperty('--acc',u.acc||'');cs.style.setProperty('--accx',u.accx||'');cs.style.setProperty('--onacc',u.onacc||'');
  const head=`<h1>${u.title||w.t}</h1><p class="lead">${u.sub||w.d}</p>${u.meta?`<dl>${u.meta.map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('')}</dl>`:''}${u.tested?`<p class="note">${u.tested}</p>`:''}`;
  sc.innerHTML=`<div class="cs-in">${c.map((s,n)=>`<section class="cs-s">${n?'':head}<h2>${s.h}</h2>${(s.b||s.p).map(bl).join('')}</section>`).join('')}</div>`;
  st.innerHTML=c.map(s=>`<div class="cs-v next" aria-hidden="true">${(V[s.v]||V.cover)(w,s.d)}</div>`).join('')+`<div class="cs-dots">${c.map((s,n)=>`<button type="button" aria-label="Go to section ${n+1}" data-n="${n}"></button>`).join('')}</div>`;
