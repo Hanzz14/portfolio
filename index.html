@@ -82,9 +82,9 @@ html,body{overscroll-behavior:none}.ov:not(.on) *{pointer-events:none!important}
 .cs-top{position:relative;flex:none;height:calc(64px + env(safe-area-inset-top,0px));display:flex;align-items:center;justify-content:space-between;padding:env(safe-area-inset-top,0px) 28px 0;border-bottom:1px solid rgba(6,34,63,.1)}
 .cs-top::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--acc);transform:scaleX(var(--sp,0));transform-origin:left}
 .cs-logo{height:34px;display:block}
-.btn.o.cs-x{height:40px;padding:0 18px;font-size:12px;gap:8px}
-.btn.o.cs-x:hover{background:var(--navy);color:#fff}
-.btn.o.cs-x svg{width:15px;height:15px}
+.btn.o.cs-x{width:40px;height:40px;padding:0;border:0;border-radius:50%;background:transparent;box-shadow:none;justify-content:center;gap:0}
+.btn.o.cs-x:hover{background:rgba(6,34,63,.08);color:var(--navy)}
+.btn.o.cs-x svg{width:20px;height:20px}
 .cs-body{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr}
 .cs-stage{position:relative;overflow:hidden;container-type:size;background:radial-gradient(120% 90% at 30% 15%,#f0eee9,#dedbd4)}
 .cs-scroll{overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none;outline:none}
@@ -155,9 +155,9 @@ html,body{overscroll-behavior:none}.ov:not(.on) *{pointer-events:none!important}
 @media (orientation:portrait){
 .cs-top{padding:env(safe-area-inset-top,0px) 16px 0}
 .cs-logo{height:30px}
-.cs-body{grid-template-columns:1fr;grid-template-rows:calc(var(--vh,1vh)*40) 1fr}
+.cs-body{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) minmax(0,2fr)}
 .cs-stage{border-bottom:1px solid rgba(6,34,63,.1)}
-.cs-dots{bottom:10px;gap:10px}
+.cs-dots{display:none}
 .cs-in{padding:0 22px}
 .cs-s{min-height:calc(var(--vh,1vh)*56);padding-top:calc(var(--vh,1vh)*5);opacity:1;transition:none}
 .cs-s h1{font-size:30px}
@@ -244,6 +244,13 @@ html,body{overscroll-behavior:none}.ov:not(.on) *{pointer-events:none!important}
 .v-cta span{display:block;margin-top:.6em;font:400 max(12px,2.1cqmin)/1.4 Inter,sans-serif;opacity:.85}
 @media (orientation:portrait){.v-ic{gap:max(8px,2cqh);width:min(88cqw,380px)}.v-rows{padding:1.5% 6%;width:min(88cqw,420px)}.v-rows>div{padding:2.4% 0}.v-rows b{font-size:16px}.v-rows span{font-size:12px}}
 
+.cs-cta{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 2.2em}
+.cs-s .lead:has(+.cs-cta){margin-bottom:1.4em}
+.cs-cta .btn{height:46px;min-width:0;flex:none;padding:0 24px;font-size:12px;letter-spacing:.12em;text-decoration:none}
+.cs-cta .btn.o:hover{background:var(--navy);color:#fff}
+.v-st>div:first-child span{opacity:.92}
+.v-fn>div.b span{opacity:.9}
+@media (orientation:portrait){.v-st>div,.v-cmp>div,.v-fn>div,.v-rows,.v-res,.v-win,.v-cover,.v-sys .sws .sk,.v-sys .ty .sk{border-radius:10px}.v-ic b{font-size:16px}.v-ic span{font-size:11px}.v-rows b{font-size:15px}.v-rows span{font-size:11px}.v-st b{font-size:28px}.v-st span{font-size:11px}.cs-cta .btn{height:42px;padding:0 18px;font-size:11px}}
 @media (prefers-reduced-motion:reduce){#cs,#cs.on{transition-duration:.01s}.cs-v,.sk,.fn,.v-flow path,.v-res .bars i{transition-duration:.01s!important;transition-delay:0s!important}}
 
 </style>
@@ -272,7 +279,7 @@ const HISTORY=[/* [date, title, company, one-line achievement] */['2024 – Pres
 const TESTIMONIALS=[{q:'Very easy to work with, very thorough, great productivity, creativity and detail oriented.',n:'Che Monagan',r:'Founder of PharmaChelation'},{q:'If you’re looking for a professional designer, you’re in the right place with Ali. He’s a very talented designer who can create beautiful applications. He completed everything on time and responded quickly to all my questions. He also took my feedback into account throughout the design process. I would definitely hire him again.',n:'Moritz Heschl',r:'Founder of Clipzy'},{q:'Ali is a very skilled UX/UI designer. He audited our webapp and was able to come up with multiple effective redesigns based on our market segmentation. I would definitely recommend him and looking forward to working with him again.',n:'Mike M',r:'Founder of DayOD'}];
 /* img = path to cover (1920×1080 landscape, 1080×1920 if orient:'portrait'). Replace the files in assets/projects/ or change the paths. */
 /* WORK 1 CASE STUDY (HOMEDEC 2026). Text blocks: 'string' = paragraph, {h3},{ul},{ol},{quote},{note},{kv},{tbl:{h:[],r:[[]]}},{thanks:1}. v = visual: web | shots | cmp | st | rows | fn | cta. d = visual data. */
-const HOMEDEC={acc:'#69BA45',accx:'#2F7A1F',onacc:'#06223F',title:'HOMEDEC 2026 Website',sub:'Contributed to a 10.7% increase in visitors from last year',
+const HOMEDEC={acc:'#3F8F2B',accx:'#2F7A1F',onacc:'#fff',cta:[['Open Live Site','https://homedec.co.id/'],['Open Figma Design','#']],title:'HOMEDEC 2026 Website',sub:'Contributed to a 10.7% increase in visitors from last year',
  meta:[['Role','Freelance UI / Web Designer (partnering with Krona Digital Agency)'],['Client','CIS Exhibition, organizer of HOMEDEC'],['Year','2026'],['Duration','~2 months'],['Team','Me (designer), Visual Director and Developers from Krona Digital Agency'],['Project management','Krona Digital Agency'],['Tools','Figma, Affinity'],['Live site','<a href="https://homedec.co.id/" target="_blank" rel="noopener">homedec.co.id</a>'],['Key visual','Tedanesia Creative Studio']],
  tested:'Event result: 28,000 visitors (+10.7% vs 2025) · Google PageSpeed: 92 SEO and 100 Best Practices on most pages.',
  sections:[
@@ -520,7 +527,7 @@ const cs=$('cs'),sc=$('csS'),st=$('csV'),X=$('csX'),RM=matchMedia('(prefers-redu
  inert=[...document.querySelectorAll('#ovs,header,.dots,.arr,#bg,#menu')],
  clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),mxs=()=>Math.max(0,sc.scrollHeight-sc.clientHeight);
 let tg=0,cu=0,act=-1,armed=false,raf=0,lastSp=-1,secs=[],vs=[],ds=[],back=null;
-X.innerHTML='Close <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg>';
+X.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg>';
 /* left-side visuals (placeholders built from neutral components) */
 const IC={link:'<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>',cal:'<path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>',layers:'<path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>',users:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',phone:'<path d="M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM12 18h.01"/>',eye:'<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>',target:'<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>',msg:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',zap:'<path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>',code:'<path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/>',redo:'<path d="M3 12a9 9 0 0 1 15-6.7L21 8M21 3v5h-5M21 12a9 9 0 0 1-15 6.7L3 16M3 21v-5h5"/>'};
 const V={
@@ -548,7 +555,7 @@ const V={
 const bl=x=>typeof x==='string'?`<p>${x}</p>`:x.h3?`<h3>${x.h3}</h3>`:x.ul?`<ul>${x.ul.map(i=>`<li>${i}</li>`).join('')}</ul>`:x.ol?`<ol>${x.ol.map(i=>`<li>${i}</li>`).join('')}</ol>`:x.quote?`<blockquote>${x.quote}</blockquote>`:x.note?`<p class="note">${x.note}</p>`:x.kv?`<dl>${x.kv.map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('')}</dl>`:x.tbl?`<div class="tw"><table><thead><tr>${x.tbl.h.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>${x.tbl.r.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`:x.thanks?`<div class="thx"><p class="nm">Thank you</p><p><strong>Ali Hafidz</strong></p><p><a href="mailto:alihafidz180@gmail.com">alihafidz180@gmail.com</a> · +62 896 8731 0617</p><p>More work: <a href="https://halo-dz.framer.website" target="_blank" rel="noopener">halo-dz.framer.website</a></p></div>`:'';
 const build=k=>{const w=WORKS[k],u=w.study||{},c=u.sections||w.cs||CASE;
  cs.style.setProperty('--acc',u.acc||'');cs.style.setProperty('--accx',u.accx||'');cs.style.setProperty('--onacc',u.onacc||'');
- const head=`<h1>${u.title||w.t}</h1><p class="lead">${u.sub||w.d}</p>${u.meta?`<dl>${u.meta.map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('')}</dl>`:''}${u.tested?`<p class="note">${u.tested}</p>`:''}`;
+ const head=`<h1>${u.title||w.t}</h1><p class="lead">${u.sub||w.d}</p>${u.cta?`<div class="cs-cta">${u.cta.map((c,n)=>`<a class="btn${n?' o':''}" href="${c[1]}"${c[1]==='#'?'':' target="_blank" rel="noopener"'}>${c[0]}</a>`).join('')}</div>`:''}${u.meta?`<dl>${u.meta.map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('')}</dl>`:''}${u.tested?`<p class="note">${u.tested}</p>`:''}`;
  sc.innerHTML=`<div class="cs-in">${c.map((s,n)=>`<section class="cs-s">${n?'':head}<h2>${s.h}</h2>${(s.b||s.p).map(bl).join('')}</section>`).join('')}</div>`;
  st.innerHTML=c.map(s=>`<div class="cs-v next" aria-hidden="true">${(V[s.v]||V.cover)(w,s.d)}</div>`).join('')+`<div class="cs-dots">${c.map((s,n)=>`<button type="button" aria-label="Go to section ${n+1}" data-n="${n}"></button>`).join('')}</div>`;
  secs=[...sc.querySelectorAll('.cs-s')];vs=[...st.querySelectorAll('.cs-v')];ds=[...st.querySelectorAll('.cs-dots button')]};
