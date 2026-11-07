@@ -53,7 +53,7 @@ h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:300;margin:0}
 /* portrait fallback (3D frames are hidden there): HTML cards */
 .tt{display:flex;width:100%;height:100%;transition:transform .8s cubic-bezier(.6,0,.2,1)}.ts{flex:0 0 100%;min-width:0;margin:0;display:flex;flex-direction:column;padding:calc(var(--u,4px)*7.5)}
 .qm{font:300 calc(var(--u,4px)*15)/.7 Fraunces,Georgia,serif;color:var(--blue);height:.5em}.ts blockquote{margin:calc(var(--u,4px)*4.5) 0 calc(var(--u,4px)*3);font-family:Fraunces,Georgia,serif;font-weight:300;font-size:max(12.5px,calc(var(--u,4px)*var(--k,4.9)));line-height:1.42;color:var(--navy)}.ts figcaption{margin-top:auto;display:flex;align-items:center;gap:12px;font-size:max(12.5px,calc(var(--u,4px)*3.5));line-height:1.35}.ts figcaption b{font-weight:500}.ts figcaption span span{color:var(--mute)}.av{flex:none;width:max(30px,calc(var(--u,4px)*8.7));height:max(30px,calc(var(--u,4px)*8.7));border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:max(11px,calc(var(--u,4px)*3));letter-spacing:.06em}
-.uw{aspect-ratio:888/472;border-radius:14px;overflow:hidden;background:#181818}.uw img{width:100%;height:100%;object-fit:cover;display:block}
+.uw{aspect-ratio:3198/1614;border-radius:14px;overflow:hidden;background:#181818}.uw img{width:100%;height:100%;object-fit:cover;display:block}
 header{position:fixed;z-index:6;top:0;left:0;right:0;height:9vh;min-height:56px;padding:env(safe-area-inset-top,0px) 28px 0;display:flex;align-items:center;justify-content:space-between;color:var(--navy)}
 header b{font:400 22px Fraunces,Georgia,serif}header nav{display:flex;gap:30px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase}.logo{display:block;line-height:0;filter:drop-shadow(0 6px 14px rgba(6,34,63,.35))}.logo img{height:38px;width:auto;display:block}
 header nav a{color:#fff;opacity:.82;cursor:pointer;padding:8px 0;border-bottom:2px solid transparent;text-shadow:0 1px 10px rgba(0,0,0,.45);transition:opacity .3s,border-color .3s}header nav a:hover{opacity:1}header nav a.on{opacity:1;border-bottom-color:#fff}
@@ -251,6 +251,14 @@ html,body{overscroll-behavior:none}.ov:not(.on) *{pointer-events:none!important}
 .v-st>div:first-child span{opacity:.92}
 .v-fn>div.b span{opacity:.9}
 @media (orientation:portrait){.v-st>div,.v-cmp>div,.v-fn>div,.v-rows,.v-res,.v-win,.v-cover,.v-sys .sws .sk,.v-sys .ty .sk{border-radius:10px}.v-ic b{font-size:16px}.v-ic span{font-size:11px}.v-rows b{font-size:15px}.v-rows span{font-size:11px}.v-st b{font-size:28px}.v-st span{font-size:11px}.cs-cta .btn{height:42px;padding:0 18px;font-size:11px}}
+#cs.wip .cs-body{grid-template-columns:1fr;grid-template-rows:1fr}
+#cs.wip .cs-stage{display:none}
+#cs.wip .cs-scroll{display:grid;place-items:center}
+.wipb{max-width:540px;padding:0 28px}
+.wipb .we{margin:0 0 1.2em;font:600 12px/1.4 Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.wipb h2{font-size:clamp(32px,3.6vw,56px);line-height:1.08;margin:0 0 .5em}
+.wipb p{margin:0 0 1.8em;font-size:clamp(15px,1.2vw,18px);line-height:1.7;color:var(--mute)}
+.wipb .btn{text-decoration:none}
 @media (prefers-reduced-motion:reduce){#cs,#cs.on{transition-duration:.01s}.cs-v,.sk,.fn,.v-flow path,.v-res .bars i{transition-duration:.01s!important;transition-delay:0s!important}}
 
 </style>
@@ -419,7 +427,7 @@ for(let k=0;k<=N;k++)slab(k*BAY-BAY/2-.75,k*BAY-BAY/2+.75,0,4.4,0,.4,pillarM,1.2
 /* LED: 3000 K emissive strips (bloom picks up values >1) + soft wall-wash */
 const LED=0xffb46b,ledM=new THREE.MeshBasicMaterial({color:new THREE.Color(LED).multiplyScalar(4)});
 if(Q.rect)RectAreaLightUniformsLib.init();
-const artM=(map,col)=>{const m=new THREE.MeshBasicMaterial(map?{map,toneMapped:false}:{color:col,toneMapped:false});m.onBeforeCompile=s=>{s.fragmentShader=s.fragmentShader.replace('#include <dithering_fragment>','#include <dithering_fragment>\ngl_FragColor.a=0.;')};return m}; /* alpha 0 marks cover pixels so the final pass can skip tone mapping */
+const artM=(map,col)=>{const m=new THREE.MeshBasicMaterial(map?{map,toneMapped:false}:{color:col,toneMapped:false});m.onBeforeCompile=s=>{s.fragmentShader=s.fragmentShader.replace('#include <map_fragment>',THREE.ShaderChunk.map_fragment.replace('texture2D( map, vMapUv )','texture2D( map, vMapUv, -.5 )')).replace('#include <dithering_fragment>','#include <dithering_fragment>\ngl_FragColor.a=0.;')};return m}; /* alpha 0 marks cover pixels so the final pass can skip tone mapping */
 const ph=(l,w,h)=>cv(w,h,(g)=>{g.fillStyle='#dcdcde';g.fillRect(0,0,w,h);g.fillStyle='#8a8c92';g.textAlign='center';g.font=`${h*.04}px Inter,Arial,sans-serif`;g.fillText('COVER IMAGE',w/2,h*.46);g.fillStyle='#3a3c42';g.font=`600 ${h*.07}px Inter,Arial,sans-serif`;g.fillText(l,w/2,h*.55)});
 D.forEach(n=>{const t=.035,i=.05,e=.018;
  [[0,n.h/2+t/2,n.w+2*t,t],[0,-n.h/2-t/2,n.w+2*t,t],[n.w/2+t/2,0,t,n.h],[-n.w/2-t/2,0,t,n.h]].forEach(f=>slab(n.x+f[0]-f[2]/2,n.x+f[0]+f[2]/2,n.yc+f[1]-f[3]/2,n.yc+f[1]+f[3]/2,-.1,-.03,frameM,1,0,0));  /* thin metal frame */
@@ -432,12 +440,12 @@ const RL=Q.rect?[0,1].map(()=>{const l=new THREE.RectAreaLight(LED,0,1,.05);scen
 function washLights(f){const b=Math.floor(f),r=f-b;RL.forEach((l,j)=>{const n=NB[b+j];if(!n){l.intensity=0;return}l.width=n.x1-n.x0-.3;l.position.set(n.x,n.y1-.12,-.02);l.lookAt(n.x,n.y0,-.08);l.intensity=14*(j?r:1-r)})}
 /* contact bay: two frames hung on the wall (no backlight). Review = sliding strip texture, Upwork = screenshot */
 const cg=new THREE.Group();scene.add(cg);
-const CF={rv:{x:84.3,w:2.5,h:2.6,yc:2.5},uw:{x:87.3,w:3.0,h:(3-.24)*472/888+.24}};CF.uw.yc=CF.rv.yc+CF.rv.h/2-CF.uw.h/2;
+const CF={rv:{x:84.3,w:2.5,h:2.6,yc:2.5},uw:{x:87.3,w:3.0,h:(3-.24)*1614/3198+.24}};CF.uw.yc=CF.rv.yc+CF.rv.h/2-CF.uw.h/2;
 function hang(f,map,inset=0){const t=.035,d=.075;[[0,f.h/2+t/2,f.w+2*t,t],[0,-f.h/2-t/2,f.w+2*t,t],[f.w/2+t/2,0,t,f.h],[-f.w/2-t/2,0,t,f.h]].forEach(a=>cg.add(slab(f.x+a[0]-a[2]/2,f.x+a[0]+a[2]/2,f.yc+a[1]-a[3]/2,f.yc+a[1]+a[3]/2,0,d,frameM,1,0,0)));
  add(new THREE.Mesh(new THREE.PlaneGeometry(f.w,f.h),artM(null,0xf1efea)),f.x,f.yc,.05,false,cg);   /* off-white mat */
- if(map){const iw=f.w-2*inset;add(new THREE.Mesh(new THREE.PlaneGeometry(iw,iw*472/888),artM(map)),f.x,f.yc,.055,false,cg)}}
+ if(map){const iw=f.w-2*inset;add(new THREE.Mesh(new THREE.PlaneGeometry(iw,iw*1614/3198),artM(map)),f.x,f.yc,.055,false,cg)}}
 const RV={tk:0};hang(CF.rv,null);   /* review text is real HTML laid over this plain panel (crisp at any resolution) */
-const uwT=TL.load('assets/upwork-profile.png',undefined,undefined,()=>{fail('assets/upwork-profile.png');uwT.image=ph('Upwork profile',888,472);uwT.needsUpdate=true});uwT.colorSpace=THREE.SRGBColorSpace;uwT.anisotropy=ANA;TEX.push(uwT);hang(CF.uw,uwT,.12);
+const uwT=TL.load('assets/upwork-profile.webp',undefined,undefined,()=>{fail('assets/upwork-profile.webp');uwT.image=ph('Upwork profile',3198,1614);uwT.needsUpdate=true});uwT.colorSpace=THREE.SRGBColorSpace;uwT.anisotropy=ANA;TEX.push(uwT);hang(CF.uw,uwT,.12);
 /* floor: instanced 1.1 × 0.55 m tiles, per-tile tint + 180° flips, hairline joints */
 {const FW=1.1,FD=.55,NX=Math.ceil(L/FW)+1,NZ=Math.ceil(40/FD),g=new THREE.PlaneGeometry(FW,FD);g.rotateX(-Math.PI/2);
  const fl=new THREE.InstancedMesh(g,floorM,NX*NZ),o=new THREE.Object3D(),c=new THREE.Color();fl.receiveShadow=true;
@@ -466,9 +474,9 @@ plant(6.4,2.4);bench(2.4,3.4);plant(BAY+6.2,1.6);bench(2*BAY-5.6,2.6);plant(3*BA
 /* post: HDR render target (MSAA) -> bloom -> tone map. Cover pixels (alpha 0) skip ACES so toneMapped:false really holds. */
 const comp=new EffectComposer(R,new THREE.WebGLRenderTarget(8,8,{type:THREE.HalfFloatType,samples:Q.ms}));comp.addPass(new RenderPass(scene,cam));
 const bloom=new UnrealBloomPass(new THREE.Vector2(256,256),MOBILE?.5:.75,.6,1.0);comp.addPass(bloom);
-comp.addPass(new ShaderPass(new THREE.RawShaderMaterial({toneMapped:false,uniforms:{tDiffuse:{value:null},toneMappingExposure:{value:R.toneMappingExposure}},
+const fin=new ShaderPass(new THREE.RawShaderMaterial({toneMapped:false,uniforms:{tDiffuse:{value:null},toneMappingExposure:{value:R.toneMappingExposure},uTexel:{value:new THREE.Vector2(.0005,.0008)}},
  vertexShader:'precision highp float;attribute vec3 position;attribute vec2 uv;uniform mat4 modelViewMatrix;uniform mat4 projectionMatrix;varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
- fragmentShader:'precision highp float;uniform sampler2D tDiffuse;varying vec2 vUv;\n#include <tonemapping_pars_fragment>\n#include <colorspace_pars_fragment>\nvoid main(){vec4 c=texture2D(tDiffuse,vUv);vec3 col=c.rgb;if(c.a>.5)col=ACESFilmicToneMapping(col);gl_FragColor=sRGBTransferOETF(vec4(clamp(col,0.,1.),1.));}'})));
+ fragmentShader:'precision highp float;uniform sampler2D tDiffuse;uniform vec2 uTexel;varying vec2 vUv;\n#include <tonemapping_pars_fragment>\n#include <colorspace_pars_fragment>\nvec3 enc(vec3 x){return sRGBTransferOETF(vec4(clamp(x,0.,1.),1.)).rgb;}void main(){vec4 c=texture2D(tDiffuse,vUv);vec3 col;if(c.a>.5){col=enc(ACESFilmicToneMapping(c.rgb));}else{col=enc(c.rgb);vec4 n1=texture2D(tDiffuse,vUv+vec2(uTexel.x,0.)),n2=texture2D(tDiffuse,vUv-vec2(uTexel.x,0.)),n3=texture2D(tDiffuse,vUv+vec2(0.,uTexel.y)),n4=texture2D(tDiffuse,vUv-vec2(0.,uTexel.y));if(n1.a+n2.a+n3.a+n4.a<.5){vec3 bl=(enc(n1.rgb)+enc(n2.rgb)+enc(n3.rgb)+enc(n4.rgb))*.25;col=clamp(col+(col-bl)*.55,0.,1.);}}gl_FragColor=vec4(col,1.);}'}));comp.addPass(fin);
 /* overlays */
 const AR='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>',ext=u=>/^https?:/.test(u)?' target="_blank" rel="noopener"':'';
 const DL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5M4 20h16"/></svg>',CH=d=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${d}"/></svg>`;
@@ -483,7 +491,7 @@ const sections=[
 `<div class="cw"><div class="ct"><div class="eb">Let’s Talk</div><h2>Let’s take your idea from paper to a <em>live product.</em></h2><p>Send me a project brief, even a rough one. I’ll come back with questions and a first take on how I’d approach it.</p><nav class="cl">${[['Email','mailto:'+ME.email],['WhatsApp',ME.whatsapp],['LinkedIn',ME.linkedin]].map(c=>`<a href="${c[1]}"${ext(c[1])}><span>${c[0]}</span>${AR}</a>`).join('')}</nav></div>
 <div class="cr"><div class="tcol"><div class="tv" aria-live="polite"><div class="tt">${TESTIMONIALS.map(t=>`<figure class="ts" style="--k:${t.q.length>250?4.3:t.q.length>120?4.9:5.6}"><span class="qm">“</span><blockquote>${t.q}</blockquote><figcaption><span class="av">${t.n.split(' ').map(w=>w[0]).join('').slice(0,2)}</span><span><b>${t.n}</b><br><span>${t.r}</span></span></figcaption></figure>`).join('')}</div></div>
 <div class="tn"><div class="tb"><button id="tprev" aria-label="Previous review"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button><button id="tnext" aria-label="Next review"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button></div></div></div>
-<div class="ucard"><a class="uw" href="${ME.upwork}"${ext(ME.upwork)} aria-label="Ali H. on Upwork"><img src="assets/upwork-profile.png" alt="Upwork profile: Ali H., 98% Job Success, Top Rated, $10K+ earned, 43 jobs, 970 hours"></a><div class="ur"><a class="btn" href="${ME.upwork}"${ext(ME.upwork)}>View on Upwork ${AR}</a><div class="dr"><span>Want to see another work?</span><a class="ln" href="${ME.dribbble}"${ext(ME.dribbble)}>Open my ${ME.otherName} ${AR}</a></div></div></div></div></div>`];
+<div class="ucard"><a class="uw" href="${ME.upwork}"${ext(ME.upwork)} aria-label="Ali Hafidz on Upwork"><img src="assets/upwork-profile.webp" alt="Upwork profile: Ali Hafidz, 98% Job Success, Top Rated, $10K+ earned, 43 jobs, 974 hours"></a><div class="ur"><a class="btn" href="${ME.upwork}"${ext(ME.upwork)}>View on Upwork ${AR}</a><div class="dr"><span>Want to see another work?</span><a class="ln" href="${ME.dribbble}"${ext(ME.dribbble)}>Open my ${ME.otherName} ${AR}</a></div></div></div></div></div>`];
 if(MV){sections.splice(1,1,ABOUT_M);sections.splice(sections.length-1,1,REV_M,CON_M)}   /* mobile: 8 pages (Reviews and Contact split) */
 const closeSheets=()=>document.querySelectorAll('.sheet.open').forEach(e=>{e.classList.remove('open');e.scrollTop=0});
 $('ovs').innerHTML=sections.map(s=>`<div class="ov">${s}</div>`).join('');
@@ -553,8 +561,9 @@ const V={
  result:()=>`<div class="v-res"><div class="rt"><div class="sk" style="--i:0"></div><div class="sk s" style="--i:1"></div></div><div class="bars">${[30,44,38,66,90].map((h,n)=>`<i class="${n===4?'h':''}" style="--h:${h};--i:${n}"></i>`).join('')}</div><div class="rl">${[0,1,2,3,4].map(n=>`<div class="sk" style="--i:${n+5}"></div>`).join('')}</div></div>`
 };
 const bl=x=>typeof x==='string'?`<p>${x}</p>`:x.h3?`<h3>${x.h3}</h3>`:x.ul?`<ul>${x.ul.map(i=>`<li>${i}</li>`).join('')}</ul>`:x.ol?`<ol>${x.ol.map(i=>`<li>${i}</li>`).join('')}</ol>`:x.quote?`<blockquote>${x.quote}</blockquote>`:x.note?`<p class="note">${x.note}</p>`:x.kv?`<dl>${x.kv.map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('')}</dl>`:x.tbl?`<div class="tw"><table><thead><tr>${x.tbl.h.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>${x.tbl.r.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`:x.thanks?`<div class="thx"><p class="nm">Thank you</p><p><strong>Ali Hafidz</strong></p><p><a href="mailto:alihafidz180@gmail.com">alihafidz180@gmail.com</a> · +62 896 8731 0617</p><p>More work: <a href="https://halo-dz.framer.website" target="_blank" rel="noopener">halo-dz.framer.website</a></p></div>`:'';
-const build=k=>{const w=WORKS[k],u=w.study||{},c=u.sections||w.cs||CASE;
- cs.style.setProperty('--acc',u.acc||'');cs.style.setProperty('--accx',u.accx||'');cs.style.setProperty('--onacc',u.onacc||'');
+const build=k=>{const w=WORKS[k],u=w.study||{},wip=!w.study&&!w.cs,c=u.sections||w.cs||CASE;
+ cs.style.setProperty('--acc',u.acc||'');cs.style.setProperty('--accx',u.accx||'');cs.style.setProperty('--onacc',u.onacc||'');cs.classList.toggle('wip',wip);
+ if(wip){sc.innerHTML=`<div class="wipb"><p class="we">${w.t}</p><h2>Case study under construction</h2><p>Please wait, or read the HOMEDEC case study in the meantime.</p><a class="btn" href="#" data-cs="0">Read HOMEDEC case study →</a></div>`;st.innerHTML='';secs=[];vs=[];ds=[];return}
  const head=`<h1>${u.title||w.t}</h1><p class="lead">${u.sub||w.d}</p>${u.cta?`<div class="cs-cta">${u.cta.map((c,n)=>`<a class="btn${n?' o':''}" href="${c[1]}"${c[1]==='#'?'':' target="_blank" rel="noopener"'}>${c[0]}</a>`).join('')}</div>`:''}${u.meta?`<dl>${u.meta.map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('')}</dl>`:''}${u.tested?`<p class="note">${u.tested}</p>`:''}`;
  sc.innerHTML=`<div class="cs-in">${c.map((s,n)=>`<section class="cs-s">${n?'':head}<h2>${s.h}</h2>${(s.b||s.p).map(bl).join('')}</section>`).join('')}</div>`;
  st.innerHTML=c.map(s=>`<div class="cs-v next" aria-hidden="true">${(V[s.v]||V.cover)(w,s.d)}</div>`).join('')+`<div class="cs-dots">${c.map((s,n)=>`<button type="button" aria-label="Go to section ${n+1}" data-n="${n}"></button>`).join('')}</div>`;
@@ -586,13 +595,14 @@ addEventListener('keydown',e=>{if(!csOpen)return;if(e.key==='Escape'){close();re
  else if(e.key==='Home')tg=0;else if(e.key==='End')tg=mxs();else return;
  e.preventDefault();if(d!==null)tg=clamp(tg+d,0,mxs())});
 X.onclick=close;
-document.addEventListener('click',e=>{const b=e.target.closest('[data-cs]');if(b){e.preventDefault();open(+b.dataset.cs)}});
+const swap=k=>{build(k);sc.scrollTop=0;tg=cu=0;act=-1;armed=false;lastSp=-1;cs.style.setProperty('--sp',0);setTimeout(()=>{if(csOpen)armed=true},350)};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-cs]');if(b){e.preventDefault();csOpen?swap(+b.dataset.cs):open(+b.dataset.cs)}});
 }
 $('prev').onclick=()=>go(i-1);$('next').onclick=()=>go(i+1);
-const PRMIN=MOBILE?2:1.5;let PR=Math.min(devicePixelRatio,Q.pr),slow=16,fcount=0,lastT=performance.now();
+const PRMIN=2;let PR=Math.min(devicePixelRatio,Q.pr),slow=16,fcount=0,lastT=performance.now();
 function size(){const w=innerWidth,h=innerHeight,a=w/h,m=a<1||w<800,fr=m?.7:.45;Z0=m?9:10.5;
  /* FOV solved so a 4.8 m display fills ~45% (desktop) / ~70% (mobile) of the viewport width at the resting camera distance */
- cam.fov=THREE.MathUtils.clamp(2*Math.atan(4.8/fr/a/2/Z0)*180/Math.PI,24,75);cam.aspect=a;cg.visible=true;document.documentElement.style.setProperty('--vh',innerHeight/100+'px');R.setPixelRatio(PR);R.setSize(w,h);comp.setPixelRatio(PR);comp.setSize(w,h);bloom.setSize(w,h);cam.updateProjectionMatrix()}   /* bloom at CSS-pixel res = much cheaper */
+ cam.fov=THREE.MathUtils.clamp(2*Math.atan(4.8/fr/a/2/Z0)*180/Math.PI,24,75);cam.aspect=a;cg.visible=true;document.documentElement.style.setProperty('--vh',innerHeight/100+'px');R.setPixelRatio(PR);R.setSize(w,h);comp.setPixelRatio(PR);comp.setSize(w,h);bloom.setSize(w,h);fin.uniforms.uTexel.value.set(1/(w*PR),1/(h*PR));cam.updateProjectionMatrix()}   /* bloom at CSS-pixel res = much cheaper */
 addEventListener('resize',size);size();render();
 const camX=k=>MV?(k<6?k*BAY:k===6?CF.rv.x:CF.uw.x):k*BAY,PRE={0:{z:5.5,y:1.1},1:{z:6.6,y:.9},6:{z:4.3,y:1.84},7:{z:4.7,y:1.5}};let cz=0,cy=1.65;   /* mobile: closer, per-page camera for About / Reviews / Contact */
 const clock=new THREE.Clock(),A1=document.querySelector('.tn'),A2=document.querySelector('.ucard'),A3=document.querySelector('.tv'),vv=new THREE.Vector3();let sunX=1e9,tw=0;
