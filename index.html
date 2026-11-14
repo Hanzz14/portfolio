@@ -442,7 +442,8 @@ slab(XMIN,XMAX,0,.1,-.1,-.05,darkM,1,0,0,false);                 /* baseboard sh
 slab(XMIN,XMAX,4.4,H,0,1,headM,.8,.3,.2);                        /* header band */
 for(let k=0;k<=N;k++)slab(k*BAY-BAY/2-.75,k*BAY-BAY/2+.75,0,4.4,0,.4,pillarM,1.2,k*.31,k*.17);
 /* LED: 3000 K emissive strips (bloom picks up values >1) + soft wall-wash */
-const LED=0xffb46b,ledM=new THREE.MeshBasicMaterial({color:new THREE.Color(LED).multiplyScalar(4)});
+const GLOW=.55;   /* glow around the frames: 1 = original, lower = subtler, 0 = none (also lower the LED multiplier below for less) */
+const LED=0xffb46b,ledM=new THREE.MeshBasicMaterial({color:new THREE.Color(LED).multiplyScalar(2.8)});
 if(Q.rect)RectAreaLightUniformsLib.init();
 const artM=(map,col)=>{const m=new THREE.MeshBasicMaterial(map?{map,toneMapped:false}:{color:col,toneMapped:false});m.onBeforeCompile=s=>{s.fragmentShader=s.fragmentShader.replace('#include <map_fragment>',THREE.ShaderChunk.map_fragment.replace('texture2D( map, vMapUv )','texture2D( map, vMapUv, -.5 )')).replace('#include <dithering_fragment>','#include <dithering_fragment>\ngl_FragColor.a=0.;')};return m}; /* alpha 0 marks cover pixels so the final pass can skip tone mapping */
 const ph=(l,w,h)=>cv(w,h,(g)=>{g.fillStyle='#dcdcde';g.fillRect(0,0,w,h);g.fillStyle='#8a8c92';g.textAlign='center';g.font=`${h*.04}px Inter,Arial,sans-serif`;g.fillText('COVER IMAGE',w/2,h*.46);g.fillStyle='#3a3c42';g.font=`600 ${h*.07}px Inter,Arial,sans-serif`;g.fillText(l,w/2,h*.55)});
@@ -454,7 +455,7 @@ D.forEach(n=>{const t=.035,i=.05,e=.018;
  });
 /* wall-wash: only 2 RectAreaLights, handed to the two niches nearest the camera (5 lights were the main shader cost) */
 const RL=Q.rect?[0,1].map(()=>{const l=new THREE.RectAreaLight(LED,0,1,.05);scene.add(l);return l}):[],NB=Object.fromEntries(D.map(n=>[Math.round(n.x/BAY),n]));
-function washLights(f){const b=Math.floor(f),r=f-b;RL.forEach((l,j)=>{const n=NB[b+j];if(!n){l.intensity=0;return}l.width=n.x1-n.x0-.3;l.position.set(n.x,n.y1-.12,-.02);l.lookAt(n.x,n.y0,-.08);l.intensity=14*(j?r:1-r)})}
+function washLights(f){const b=Math.floor(f),r=f-b;RL.forEach((l,j)=>{const n=NB[b+j];if(!n){l.intensity=0;return}l.width=n.x1-n.x0-.3;l.position.set(n.x,n.y1-.12,-.02);l.lookAt(n.x,n.y0,-.08);l.intensity=9*(j?r:1-r)})}
 /* contact bay: two frames hung on the wall (no backlight). Review = sliding strip texture, Upwork = screenshot */
 const cg=new THREE.Group();scene.add(cg);
 const CF={rv:{x:84.3,w:2.5,h:2.6,yc:2.5},uw:{x:87.3,w:3.0,h:(3-.24)*1614/3198+.24}};CF.uw.yc=CF.rv.yc+CF.rv.h/2-CF.uw.h/2;
@@ -490,7 +491,7 @@ function sculpt(x,z){const g=new THREE.Group();add(new THREE.Mesh(new THREE.BoxG
 plant(6.4,2.4);bench(2.4,3.4);plant(BAY+6.2,1.6);bench(2*BAY-5.6,2.6);plant(3*BAY+6.4,1.8);sculpt(4*BAY-5.6,2.4);plant(5*BAY-6.2,1.8);sculpt(6*BAY+5.4,2.2);plant(6*BAY+6.6,1.6);
 /* post: HDR render target (MSAA) -> bloom -> tone map. Cover pixels (alpha 0) skip ACES so toneMapped:false really holds. */
 const comp=new EffectComposer(R,new THREE.WebGLRenderTarget(8,8,{type:THREE.HalfFloatType,samples:Q.ms}));comp.addPass(new RenderPass(scene,cam));
-const bloom=new UnrealBloomPass(new THREE.Vector2(256,256),MOBILE?.5:.75,.6,1.0);comp.addPass(bloom);
+const bloom=new UnrealBloomPass(new THREE.Vector2(256,256),(MOBILE?.5:.75)*GLOW,.5,1.0);comp.addPass(bloom);
 const fin=new ShaderPass(new THREE.RawShaderMaterial({toneMapped:false,uniforms:{tDiffuse:{value:null},toneMappingExposure:{value:R.toneMappingExposure},uTexel:{value:new THREE.Vector2(.0005,.0008)}},
  vertexShader:'precision highp float;attribute vec3 position;attribute vec2 uv;uniform mat4 modelViewMatrix;uniform mat4 projectionMatrix;varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
  fragmentShader:'precision highp float;uniform sampler2D tDiffuse;uniform vec2 uTexel;varying vec2 vUv;\n#include <tonemapping_pars_fragment>\n#include <colorspace_pars_fragment>\nvec3 enc(vec3 x){return sRGBTransferOETF(vec4(clamp(x,0.,1.),1.)).rgb;}void main(){vec4 c=texture2D(tDiffuse,vUv);vec3 col;if(c.a>.5){col=enc(ACESFilmicToneMapping(c.rgb));}else{col=enc(c.rgb);vec4 n1=texture2D(tDiffuse,vUv+vec2(uTexel.x,0.)),n2=texture2D(tDiffuse,vUv-vec2(uTexel.x,0.)),n3=texture2D(tDiffuse,vUv+vec2(0.,uTexel.y)),n4=texture2D(tDiffuse,vUv-vec2(0.,uTexel.y));if(n1.a+n2.a+n3.a+n4.a<.5){vec3 bl=(enc(n1.rgb)+enc(n2.rgb)+enc(n3.rgb)+enc(n4.rgb))*.25;col=clamp(col+(col-bl)*.55,0.,1.);}}gl_FragColor=vec4(col,1.);}'}));comp.addPass(fin);
