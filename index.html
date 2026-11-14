@@ -442,7 +442,7 @@ slab(XMIN,XMAX,0,.1,-.1,-.05,darkM,1,0,0,false);                 /* baseboard sh
 slab(XMIN,XMAX,4.4,H,0,1,headM,.8,.3,.2);                        /* header band */
 for(let k=0;k<=N;k++)slab(k*BAY-BAY/2-.75,k*BAY-BAY/2+.75,0,4.4,0,.4,pillarM,1.2,k*.31,k*.17);
 /* LED: 3000 K emissive strips (bloom picks up values >1) + soft wall-wash */
-const GLOW=.55;   /* glow around the frames: 1 = original, lower = subtler, 0 = none (also lower the LED multiplier below for less) */
+const GLOW=.35;   /* glow around the frames: 1 = original, lower = subtler, 0 = none (also lower the LED multiplier below for less) */
 const LED=0xffb46b,ledM=new THREE.MeshBasicMaterial({color:new THREE.Color(LED).multiplyScalar(2.8)});
 if(Q.rect)RectAreaLightUniformsLib.init();
 const artM=(map,col)=>{const m=new THREE.MeshBasicMaterial(map?{map,toneMapped:false}:{color:col,toneMapped:false});m.onBeforeCompile=s=>{s.fragmentShader=s.fragmentShader.replace('#include <map_fragment>',THREE.ShaderChunk.map_fragment.replace('texture2D( map, vMapUv )','texture2D( map, vMapUv, -.5 )')).replace('#include <dithering_fragment>','#include <dithering_fragment>\ngl_FragColor.a=0.;')};return m}; /* alpha 0 marks cover pixels so the final pass can skip tone mapping */
